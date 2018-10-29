@@ -1,0 +1,6 @@
+dao/service/IDao.class
+dao/service/UsuarioDao.class
+dao/model/Usuario.class
+dao/service/Conector.class
+dao/controller/LoginController.class
+dao/service/NewMain.class
