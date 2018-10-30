@@ -17,7 +17,4 @@
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    <application>
-        <resource-handler>dao.controller.UnmappedResourceHandler</resource-handler>
-    </application>
 </faces-config>
