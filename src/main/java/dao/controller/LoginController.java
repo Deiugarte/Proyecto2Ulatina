@@ -34,7 +34,7 @@ public class LoginController implements Serializable {
         if (userLogin != null) {
             logeado = true;
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@", this.user);
-            return "bienvenida";
+            return "Bienvenida";
         } else {
             logeado = false;
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Credenciales no validas");
