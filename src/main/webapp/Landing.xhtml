@@ -5,23 +5,26 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-       <title>Landing Page</title>
+        <title>Landing Page</title>
     </h:head>
     <h:body>
-      <p:tabMenu activeIndex="#{param.i}">
-    <p:menuitem value="Login" outcome="index" icon="ui-icon-serch">
-        <f:param name="i" value="0" />
-    </p:menuitem>
-    <p:menuitem value="Sign Up" outcome="signUp" icon="ui-icon-document">
-        <f:param name="i" value="1" />
-    </p:menuitem>
-    <p:menuitem value="About" outcome="Landing" icon="ui-icon-star">
-        <f:param name="i" value="2" />
-    </p:menuitem>
-</p:tabMenu>
-    <p:galleria value="#{landing.images}" var="image" panelWidth="500" panelHeight="313" showCaption="false">
-    <p:graphicImage library="images" name="#{image}" alt="Image Description for #{image}" title="#{image}"/>
-</p:galleria>
+        <p:tabMenu activeIndex="#{param.i}">
+            <p:menuitem value="Inicio" outcome="Landing" icon="ui-icon-star">
+                <f:param name="i" value="0" />
+            </p:menuitem>
+            <p:menuitem value="Login" outcome="Login" icon="ui-icon-serch">
+                <f:param name="i" value="1" />
+            </p:menuitem>
+            <p:menuitem value="Sign Up" outcome="signUp" icon="ui-icon-document">
+                <f:param name="i" value="2" />
+            </p:menuitem>
+            <p:menuitem value="About" outcome="Landing" icon="ui-icon-document">
+                <f:param name="i" value="3" />
+            </p:menuitem>
+        </p:tabMenu>
+        <p:galleria value="#{landing.images}" var="image" panelWidth="1000" panelHeight="600" showCaption="false" style="width: 350px; margin: 0 auto;">
+            <p:graphicImage library="images" name="#{image}" alt="Image Description for #{image}" title="#{image}"/>
+        </p:galleria>
 
     </h:body>
 </html>
