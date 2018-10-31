@@ -18,8 +18,10 @@ public class LoginController implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String user, pass;
+    private String user, pass, correo;
     private boolean logeado = false;
+    private int intentos = 0;
+    private boolean estado = false;
 
     public LoginController() {
 
@@ -38,8 +40,12 @@ public class LoginController implements Serializable {
         } else {
             logeado = false;
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Credenciales no validas");
-            return "error";
+            intentos++;
         }
+        if (intentos > 2) {
+            users.setEstado(this.estado, this.user);
+        }
+        return "";
     }
 
     public void logout() {
@@ -50,6 +56,10 @@ public class LoginController implements Serializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public String desbloquear() {
+        return "DesbloqueoCuenta";
     }
 
     public String getUser() {
@@ -74,6 +84,14 @@ public class LoginController implements Serializable {
 
     public void setLogeado(boolean logeado) {
         this.logeado = logeado;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
 }

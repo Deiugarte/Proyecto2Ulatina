@@ -2,8 +2,6 @@ package dao.model;
 
 import java.util.Date;
 
-
-
 /**
  *
  * @author José Pablo
@@ -13,12 +11,13 @@ public class Usuario {
     private String contra, correo, nombre, apellido, segundoApellido, sexo, telefono;
     private Date fechaNacimiento;
     private double calificacion;
+    private boolean estado = true;
 
     public Usuario() {
 
     }
 
-    public Usuario(String contra, String correo, String nombre, String apellido, String segundoApellido, String sexo, String telefono, Date fechaNacimiento, double calificacion) {
+    public Usuario(String contra, String correo, String nombre, String apellido, String segundoApellido, String sexo, String telefono, Date fechaNacimiento, double calificacion, boolean estado) {
         this.contra = contra;
         this.correo = correo;
         this.nombre = nombre;
@@ -28,6 +27,7 @@ public class Usuario {
         this.telefono = telefono;
         this.fechaNacimiento = fechaNacimiento;
         this.calificacion = calificacion;
+        this.estado = estado;
     }
 
     public String getContra() {
@@ -86,7 +86,6 @@ public class Usuario {
         this.telefono = telefono;
     }
 
-
     public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
@@ -101,6 +100,14 @@ public class Usuario {
 
     public void setCalificacion(double calificacion) {
         this.calificacion = calificacion;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
     public String toString() {

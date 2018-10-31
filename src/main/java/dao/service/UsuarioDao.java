@@ -16,7 +16,8 @@ import org.apache.logging.log4j.Logger;
  * @author José Pablo
  */
 public class UsuarioDao implements IDao<Usuario> {
-    private final Conector conectorJDBC  = Conector.getConector();
+
+    private final Conector conectorJDBC = Conector.getConector();
     private static final Logger LOG = LogManager.getLogger(UsuarioDao.class.getName());
 
     @Override
@@ -35,7 +36,7 @@ public class UsuarioDao implements IDao<Usuario> {
                 usuarios.add(new Usuario(rs.getString("contrasena"), rs.getString("correo"),
                         rs.getString("nombre"), rs.getString("apellido"), rs.getString("segundoApellido"),
                         rs.getString("sexo"), rs.getString("telefono"),
-                        rs.getDate("fechaNacimiento"), rs.getDouble("calificacion")));
+                        rs.getDate("fechaNacimiento"), rs.getDouble("calificacion"),rs.getBoolean("estado")));
             }
             rs.close();
             stmt.close();
@@ -46,22 +47,23 @@ public class UsuarioDao implements IDao<Usuario> {
         }
         return usuarios;
     }
-    
+
     @Override
     public void insert(Usuario usuario) {
         Connection connectionDB = conectorJDBC.conectar();
         PreparedStatement ps = null;
         try {
-            ps = connectionDB.prepareStatement("INSERT INTO Persona (nombre, apellido, segundoApellido, contrasena, correo, fechaNacimiento, sexo, telefono, calificacion)  values (?,?,?,?,?,?,?,?,?)");
+            ps = connectionDB.prepareStatement("INSERT INTO Persona (nombre, apellido, segundoApellido, contrasena, correo, fechaNacimiento, sexo, telefono, calificacion,estado)  values (?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getApellido());
-            ps.setString(3,usuario.getSegundoApellido());
+            ps.setString(3, usuario.getSegundoApellido());
             ps.setString(4, usuario.getContra());
             ps.setString(5, usuario.getCorreo());
             ps.setDate(6, new java.sql.Date(usuario.getFechaNacimiento().getTime()));
             ps.setString(7, usuario.getSexo());
             ps.setString(8, usuario.getTelefono());
             ps.setDouble(9, usuario.getCalificacion());
+            ps.setBoolean(10, true);
             ps.executeUpdate();
 
         } catch (SQLException ex) {
@@ -71,14 +73,14 @@ public class UsuarioDao implements IDao<Usuario> {
         }
 
     }
-    
+
     public Usuario getUser(String name, String password) {
         Connection conn = conectorJDBC.conectar();
         PreparedStatement ps = null;
         ResultSet rs = null;
         Usuario userLogged = null;
         try {
-            ps = conn.prepareStatement("Select * from Persona where nombre=? and contrasena=? ");
+            ps = conn.prepareStatement("Select * from Persona where nombre=? and contrasena=? and estado = '1' ");
             ps.setString(1, name);
             ps.setString(2, password);
             rs = ps.executeQuery();
@@ -86,7 +88,7 @@ public class UsuarioDao implements IDao<Usuario> {
                 userLogged = new Usuario(rs.getString("contrasena"), rs.getString("correo"),
                         rs.getString("nombre"), rs.getString("apellido"), rs.getString("segundoApellido"),
                         rs.getString("sexo"), rs.getString("telefono"),
-                        rs.getDate("fechaNacimiento"), rs.getDouble("calificacion"));
+                        rs.getDate("fechaNacimiento"), rs.getDouble("calificacion"),rs.getBoolean("estado"));
             }
             return userLogged;
         } catch (SQLException ex) {
@@ -97,6 +99,21 @@ public class UsuarioDao implements IDao<Usuario> {
         return userLogged;
     }
 
+    public void setEstado(boolean estado, String nombre){
+        Connection conn = conectorJDBC.conectar();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement("Update Persona set estado = ? where nombre = ?");
+            ps.setBoolean(1, estado);
+            ps.setString(2, nombre);
+            ps.execute();
+        } catch (SQLException ex) {
+            ex.getMessage();
+        } finally{
+            conectorJDBC.cerrarConexion(conn, ps, rs);
+        }
+    }
 
     @Override
     public void delete(Usuario data) {
