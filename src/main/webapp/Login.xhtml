@@ -43,8 +43,8 @@
                     <p:commandButton id="desbloquearButton" action="#{loginController.desbloquear()}"
                                      value="Desbloquear" update="loginForm" ajax="true" style="float: left;">
                     </p:commandButton>
-                    <p:commandButton id="recuperarButton" action="#{loginController.login}"
-                                     value="Recuperar" update="loginForm" ajax="true" style="float: right;">
+                    <p:commandButton id="recuperarButton" action="#{loginController.restablecerContrasena()}"
+                                     value="Olvide mi contrasena" update="loginForm" ajax="true" style=" width: 250px; float: right;">
                     </p:commandButton>
                 </h:panelGrid>
             </p:panel>

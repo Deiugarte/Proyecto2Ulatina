@@ -61,6 +61,10 @@ public class LoginController implements Serializable {
     public String desbloquear() {
         return "DesbloqueoCuenta";
     }
+    
+    public String restablecerContrasena(){
+        return "RestablecerContrasena";
+    }
 
     public String getUser() {
         return user;
