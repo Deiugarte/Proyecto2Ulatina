@@ -5,24 +5,23 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Restablecer Contrasena</title>
+        <title>Nueva Contrasena</title>
     </h:head>
     <h:body>
         <h:form id="desbloqueoForm">
             <p:growl id="msg_debloqueo" showDetail="true" life="3000"/>
-            <p:panel id="debloqueoPnl" header="Restablecer Contrasena"
-                     style="width: 300px; margin: 0 auto; height: 220px"> 
+            <p:panel id="debloqueoPnl" header="Desbloqueo de Cuenta"
+                     style="width: 300px; margin: 0 auto; height: 180px"> 
                 <h:panelGrid id="debloqueoPanel" columns="1" cellpadding="5">
-                    <h:outputText value="Digite su correo electronico para crear una nueva contrasena"/>
+                    <h:outputText value="Digite su correo electronico"/>
                     <p:inputText id="Correo" value="#{loginController.correo}"></p:inputText>
                 </h:panelGrid>
                 <h:panelGrid columns="1" cellpadding="5" width="100%" style=" width: 50px; margin: 0 auto;">
-                    <p:commandButton id="desbloqueoCuenta" action="#{loginController.emailNuevaContrasena()}"
-                                     value="Enter" ajax="false" style="float: top">                 
+                    <p:commandButton id="desbloqueoCuenta" action="#{loginController.desbloquear()}"
+                                     value="Enter" update="desbloqueoForm" ajax="false" style="float: top">                 
                     </p:commandButton>
                 </h:panelGrid>
             </p:panel>
         </h:form>
     </h:body>
 </html>
-

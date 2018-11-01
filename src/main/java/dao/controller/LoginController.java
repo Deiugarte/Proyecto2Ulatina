@@ -7,6 +7,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 
 /**
  *
@@ -20,6 +24,7 @@ public class LoginController implements Serializable {
 
     private String user, pass, correo;
     private boolean logeado = false;
+    private String veriCode = null;
     private int intentos = 0;
     private boolean estado = false;
 
@@ -64,6 +69,26 @@ public class LoginController implements Serializable {
     
     public String restablecerContrasena(){
         return "RestablecerContrasena";
+    }
+    
+    public String emailNuevaContrasena() throws EmailException{
+        //credentials for email and email account
+        
+        veriCode = Integer.toString(((int)(Math.random()*((9999-1010)+1))));
+        
+        
+        
+        Email email = new SimpleEmail();
+        email.setHostName("smtp.googlemail.com");
+        email.setSmtpPort(465);
+        email.setAuthenticator(new DefaultAuthenticator("proyecto2ulatina@gmail.com", "proyecto_2_ulatina"));
+        email.setSSLOnConnect(true);
+        email.setFrom("proyecto2ulatina@gmail.com");
+        email.setSubject("Restablecer Contrasena");
+        email.setMsg("Su codigo de verificacion es: " + veriCode + " y expirará en 2 horas (not really...).\n");
+        email.addTo(this.correo);
+        email.send();
+        return "NuevaContrasena";
     }
 
     public String getUser() {
