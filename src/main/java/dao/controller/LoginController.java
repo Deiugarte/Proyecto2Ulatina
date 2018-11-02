@@ -41,6 +41,9 @@ public class LoginController implements Serializable {
             return "error";
         }
     }
+      public String desbloquear() {
+        return "DesbloqueoCuenta";
+    }
 
     public void logout() {
         try {

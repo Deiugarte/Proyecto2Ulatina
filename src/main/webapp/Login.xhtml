@@ -6,6 +6,8 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Login</title>
+         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        </link>
     </h:head>
     <h:body style="text-align:center"> 
         <div id="message">
@@ -20,11 +22,12 @@
                     <h:outputText value="Please try again #{loginController.user}, Error!!" />
                 </f:facet>
             </p:ajaxStatus>
-        </div>	
-        <h:form id="loginForm">
+        </div>
+        
+            <h:form style="min-width:1200px;min-height:720px;background-color: antiquewhite" id="loginForm">
             <p:growl id="msg" showDetail="true" life="4000" />
             <p:panel id="loginPnl" header="Login"
-                     style="width: 350px; margin: 0 auto;">
+                     style="width: 400px; margin: 0 auto; height: 300px">
                 <h:panelGrid id="loginPanel" columns="2" cellpadding="5">
                     <h:outputText value="Username" />
                     <p:inputText id="Usuario" value="#{loginController.user}"></p:inputText>
@@ -34,9 +37,18 @@
                                 feedback="false"></p:password>
                     <p:message for="Contraseña"></p:message>
                 </h:panelGrid>
-                <h:panelGrid columns="1" cellpadding="10" width="100%">
+                <h:panelGrid columns="2" cellpadding="10" width="100%" style=" width: 300px; margin: 0 auto;">
+                    <h:link value="Registrarse" outcome="signUp"  style="float: left;" /> 
                     <p:commandButton id="loginButton" action="#{loginController.login}"
                                      value="Login" update="loginForm" ajax="true" style="float: right;">
+                    </p:commandButton>
+                </h:panelGrid>
+                <h:panelGrid  columns="2" cellpadding="10" width="100%" style="width: 350px ;margin: 0 auto;">
+                    <p:commandButton id="desbloquearButton" action="#{loginController.desbloquear()}"
+                                     value="Desbloquear" update="loginForm" ajax="true" style="float: left;">
+                    </p:commandButton>
+                    <p:commandButton id="recuperarButton" action="#{loginController.login}"
+                                     value="Recuperar" update="loginForm" ajax="true" style="float: right;">
                     </p:commandButton>
                 </h:panelGrid>
             </p:panel>

@@ -6,6 +6,8 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Registro de nueva cuenta</title>
+         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        </link>
     </h:head>
     <h:body>
         <div id="message">
@@ -57,7 +59,7 @@
 				<p:commandButton id="signUpButton" action="#{signUpController.signUp}"
 					value="Crear Cuenta" update="signUpForm" ajax="true" style="float: right;">
 				</p:commandButton>
-                            <h:link value="Landing Page" outcome="Landing" /><br/> 
+                            <h:link value="Volver al inicio" outcome="Landing" /><br/> 
 			</h:panelGrid>
 		</p:panel>
 		<p:blockUI block="signUpPnl" trigger="signUpButton" >

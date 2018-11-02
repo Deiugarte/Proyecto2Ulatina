@@ -5,27 +5,55 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Landing Page</title>
+        <title>Inicio</title>
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        </link>
     </h:head>
     <h:body>
-        <p:tabMenu activeIndex="#{param.i}">
-            <p:menuitem value="Inicio" outcome="Landing" icon="ui-icon-star">
-                <f:param name="i" value="0" />
-            </p:menuitem>
-            <p:menuitem value="Login" outcome="Login" icon="ui-icon-serch">
-                <f:param name="i" value="1" />
-            </p:menuitem>
-            <p:menuitem value="Sign Up" outcome="signUp" icon="ui-icon-document">
-                <f:param name="i" value="2" />
-            </p:menuitem>
-            <p:menuitem value="About" outcome="Landing" icon="ui-icon-document">
-                <f:param name="i" value="3" />
-            </p:menuitem>
-        </p:tabMenu>
-        <p:galleria value="#{landing.images}" var="image" panelWidth="1000" panelHeight="600" showCaption="false" style="width: 350px; margin: 0 auto;">
-            <p:graphicImage library="images" name="#{image}" alt="Image Description for #{image}" title="#{image}"/>
-        </p:galleria>
+        <h:form style="background-color:darkgreen" id="landingForm">
 
+            <p:layout style="min-width:800px;min-height:735px;background-color: antiquewhite">
+                <p:layoutUnit  position="west" resizable="true" size="300" minSize="40" maxSize="400">
+                    Menú<br/> 
+                    <br/> 
+                    <p:button outcome="Landing" value="  Inicio " icon="ui-icon-star" disabled="true" iconPos="right">
+                        <f:param name="InicioLanding" value="50" />
+                    </p:button><br/> 
+                    <p:button outcome="Login" value="  Login  " icon="ui-icon-search" iconPos="right">
+                        <f:param name="LoginLanding" value="50" />
+                    </p:button><br/> 
+
+                    <p:button outcome="signUp" value="Sign Up" icon="ui-icon-person" iconPos="right">
+                        <f:param name="SignUp Landing" value="30" />
+                    </p:button><br/> 
+
+                    <p:button outcome="Landing" value="Options" icon="ui-icon-wrench" iconPos="right">
+                        <f:param name="OptionsLanding" value="30" />
+                    </p:button><br/> 
+                    <br/> 
+                    <p:graphicImage value="resources/Icono.jpg" />
+                </p:layoutUnit>
+                 
+                <p:layoutUnit  position="east" resizable="true" size="300" minSize="40" maxSize="400">
+                    About
+                    <br/> 
+                    <br/> 
+                    <br/> 
+                    <br/> 
+                    <br/> 
+                    <br/> 
+                    <br/> 
+                    <br/> 
+                    <br/> 
+                    <p:graphicImage value="resources/Icono.jpg" />
+                </p:layoutUnit>
+                <p:layoutUnit position="center">
+                    <p:galleria value="#{landing.images}" var="image" panelWidth="895" panelHeight="665" showCaption="false" style="width: 350px; margin: 0 auto;">
+                        <p:graphicImage library="images" name="#{image}" alt="Image Description for #{image}" title="#{image}"/>
+                    </p:galleria>
+                </p:layoutUnit>
+            </p:layout>
+        </h:form>
     </h:body>
 </html>
 
