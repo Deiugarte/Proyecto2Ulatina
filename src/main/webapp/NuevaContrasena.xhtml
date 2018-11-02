@@ -10,11 +10,17 @@
     <h:body>
         <h:form id="desbloqueoForm">
             <p:growl id="msg_debloqueo" showDetail="true" life="3000"/>
-            <p:panel id="debloqueoPnl" header="Desbloqueo de Cuenta"
-                     style="width: 300px; margin: 0 auto; height: 180px"> 
+            <p:panel id="debloqueoPnl" header="Nueva Contrasena"
+                     style="width: 300px; margin: 0 auto; height: 320px"> 
                 <h:panelGrid id="debloqueoPanel" columns="1" cellpadding="5">
-                    <h:outputText value="Digite su correo electronico"/>
-                    <p:inputText id="Correo" value="#{loginController.correo}"></p:inputText>
+                    <h:outputText value="Codigo de Verificacion:"/>
+                    <p:inputText id="veriCode" style="display:block;width:80px;margin: auto" value="#{loginController.pass}"/>	
+                    <h:outputText value="Digite su nueva contrasena:" />
+                    <p:password id="nuevaContra" value="#{loginController.pass}"
+                                feedback="false"/>
+                    <h:outputText value="Repita su contrasena:" />
+                    <p:password id="confNuevaContra" value="#{loginController.pass}"
+                                feedback="false"/>
                 </h:panelGrid>
                 <h:panelGrid columns="1" cellpadding="5" width="100%" style=" width: 50px; margin: 0 auto;">
                     <p:commandButton id="desbloqueoCuenta" action="#{loginController.desbloquear()}"
