@@ -63,10 +63,6 @@ public class LoginController implements Serializable {
         }
     }
 
-    public String desbloquear() {
-        return "DesbloqueoCuenta";
-    }
-
     public String restablecerContrasena() {
         return "RestablecerContrasena";
     }
@@ -87,24 +83,6 @@ public class LoginController implements Serializable {
         email.addTo(this.correo);
         email.send();
         return "NuevaContrasena";
-    }
-
-    public String emailDesbloqueo() throws EmailException {
-        //credentials for email and email account
-
-        veriCode = Integer.toString(((int) (Math.random() * ((9999 - 1010) + 1))));
-
-        Email email = new SimpleEmail();
-        email.setHostName("smtp.googlemail.com");
-        email.setSmtpPort(465);
-        email.setAuthenticator(new DefaultAuthenticator("proyecto2ulatina@gmail.com", "proyecto_2_ulatina"));
-        email.setSSLOnConnect(true);
-        email.setFrom("proyecto2ulatina@gmail.com");
-        email.setSubject("Restablecer Contrasena");
-        email.setMsg("Su codigo de desbloqueo es: " + veriCode + " y expirará en 2 horas (not really...).\n");
-        email.addTo(this.correo);
-        email.send();
-        return "ConfirmaryDesbloquear";
     }
 
     public String nuevaContra() {
