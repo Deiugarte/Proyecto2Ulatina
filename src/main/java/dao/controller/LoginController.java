@@ -29,28 +29,35 @@ public class LoginController implements Serializable {
     private boolean estado = false;
 
     public LoginController() {
-
     }
 
     public String login() {
-        System.out.println("LOGIN");
         UsuarioDao users = new UsuarioDao();
-        Usuario userLogin = users.getUser(this.user, this.pass);
-        FacesMessage msg = null;
+        
+        if (users.isBlocked(this.user)) return "CuentaBloqueada";
+        else if (loginUserWithCredentials(users)) return "Bienvenida"; 
+        
+        
+        
+        return "";
+    }
 
+    private boolean loginUserWithCredentials(UsuarioDao users) {
+        FacesMessage msg;
+        Usuario userLogin = users.getUser(this.user, this.pass);
         if (userLogin != null) {
             logeado = true;
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@", this.user);
-            return "Bienvenida";
+            return true;
         } else {
             logeado = false;
-            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Credenciales no validas");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Watch out for PrimeFaces."));
             intentos++;
+            if (intentos > 2) {
+                users.setEstado(this.estado, this.user);
+            }
         }
-        if (intentos > 2) {
-            users.setEstado(this.estado, this.user);
-        }
-        return "";
+        return false;
     }
 
     public void logout() {
@@ -87,7 +94,7 @@ public class LoginController implements Serializable {
 
     public String nuevaContra() {
         UsuarioDao usuerNewPass = new UsuarioDao();
-        usuerNewPass.nuevaContra(this.pass,this.correo);
+        usuerNewPass.nuevaContra(this.pass, this.correo);
         usuerNewPass.desbloqueo(this.correo);
         return "Login";
     }

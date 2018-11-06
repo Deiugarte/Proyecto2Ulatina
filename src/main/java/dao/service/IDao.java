@@ -11,7 +11,7 @@ import java.util.List;
 public interface IDao<T> {
     
     public List<T> buscarUsuarios();
-
+    
     public void insert(T data);
 
     public void delete(T data);

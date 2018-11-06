@@ -110,13 +110,11 @@ public class Usuario {
         this.estado = estado;
     }
 
+    @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer();
-        sb.append("user: ").append(this.correo);
-        sb.append("\n");
-        sb.append("contra: ").append(this.contra);
-        sb.append("\n");
-        return sb.toString();
+        return "Usuario{" + "contra=" + contra + ", correo=" + correo + ", nombre=" + nombre + ", apellido=" + apellido + ", segundoApellido=" + segundoApellido + ", sexo=" + sexo + ", telefono=" + telefono + ", fechaNacimiento=" + fechaNacimiento + ", calificacion=" + calificacion + ", estado=" + estado + '}';
     }
+
+    
 
 }

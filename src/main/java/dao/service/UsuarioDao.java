@@ -80,7 +80,7 @@ public class UsuarioDao implements IDao<Usuario> {
         ResultSet rs = null;
         Usuario userLogged = null;
         try {
-            ps = conn.prepareStatement("Select * from Persona where nombre=? and contrasena=? and estado = true ");
+            ps = conn.prepareStatement("Select * from Persona where nombre=? and contrasena=? ");
             ps.setString(1, name);
             ps.setString(2, password);
             rs = ps.executeQuery();
@@ -90,6 +90,7 @@ public class UsuarioDao implements IDao<Usuario> {
                         rs.getString("sexo"), rs.getString("telefono"),
                         rs.getDate("fechaNacimiento"), rs.getDouble("calificacion"), rs.getBoolean("estado"));
             }
+            System.out.println(userLogged.getNombre());
             return userLogged;
         } catch (SQLException ex) {
             LOG.error("No se pudo obtener el usuario", ex);
@@ -97,6 +98,25 @@ public class UsuarioDao implements IDao<Usuario> {
             conectorJDBC.cerrarConexion(conn, ps, rs);
         }
         return userLogged;
+    }
+    
+    public boolean isBlocked(String nombre){
+        Connection conn = conectorJDBC.conectar();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Boolean block = false;
+        try {
+            ps = conn.prepareStatement("SELECT * FROM Persona WHERE nombre=?");
+            ps.setString(1, nombre);
+            rs = ps.executeQuery();
+            rs.next();
+            block = rs.getString("estado").equals("1");           
+        } catch (SQLException ex) {
+            LOG.error("Error al intentar leer datos.", ex);
+        } finally {
+            conectorJDBC.cerrarConexion(conn, ps, rs);
+        }
+        return block;
     }
 
     public void setEstado(boolean estado, String nombre) {

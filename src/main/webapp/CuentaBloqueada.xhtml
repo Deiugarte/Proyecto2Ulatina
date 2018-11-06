@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Cuenta Bloqueada</title>
+    </h:head>
+    <h:body>
+        <h:form id="desbloqueoForm">
+            <p:growl id="msg_debloqueo" showDetail="true" life="3000"/>
+            <p:panel id="debloqueoPnl" header="Su cuenta se encuentra bloqueada."
+                     style="width: 300px; margin: 0 auto; height: 250px"> 
+                <h:panelGrid id="debloqueoPanel" columns="1" cellpadding="5">
+                    <h:outputText value="Esto se debe a que hubo mas de 3 intentos fallidos para iniciar sesion. Por su seguridad, por favor
+                                  restablezca su contrasena."/>
+                    
+                </h:panelGrid>
+                <h:panelGrid columns="1" cellpadding="5" width="100%" style=" width: 50px; margin: 0 auto;">
+                    <p:commandButton id="desbloqueoCuenta" action="#{loginController.restablecerContrasena()}"
+                                     value="Ok." ajax="false" style="float: top">                 
+                    </p:commandButton>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
