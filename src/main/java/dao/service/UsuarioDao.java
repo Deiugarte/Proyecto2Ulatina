@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 /**
  *
- * @author José Pablo
+ * @author JosÃ© Pablo
  */
 public class UsuarioDao implements IDao<Usuario> {
 
@@ -106,7 +106,7 @@ public class UsuarioDao implements IDao<Usuario> {
         ResultSet rs = null;
         Boolean block = false;
         try {
-            ps = conn.prepareStatement("SELECT * FROM Persona WHERE nombre=?");
+            ps = conn.prepareStatement("SELECT * FROM Persona WHERE correo=?");
             ps.setString(1, nombre);
             rs = ps.executeQuery();
             rs.next();

@@ -14,7 +14,7 @@ import org.apache.commons.mail.SimpleEmail;
 
 /**
  *
- * @author José Pablo
+ * @author JosÃ© Pablo
  */
 @ManagedBean(name = "loginController")
 @SessionScoped
@@ -24,7 +24,8 @@ public class LoginController implements Serializable {
 
     private String user, pass, auxPass, correo;
     private boolean logeado = false;
-    private String veriCode = null, code;
+    private String veriCode;
+    private String code;
     private int intentos = 0;
     private boolean estado = false;
 
@@ -32,17 +33,13 @@ public class LoginController implements Serializable {
     }
 
     public String login() {
-        UsuarioDao users = new UsuarioDao();
-        
+        UsuarioDao users = new UsuarioDao();        
         if (users.isBlocked(this.user)) return "CuentaBloqueada";
-        else if (loginUserWithCredentials(users)) return "Bienvenida"; 
-        
-        
-        
+        else if (loginUserWithCredentials(users)) return "Bienvenida";        
         return "";
     }
 
-    private boolean loginUserWithCredentials(UsuarioDao users) {
+    private boolean loginUserWithCredentials (UsuarioDao users) {
         FacesMessage msg;
         Usuario userLogin = users.getUser(this.user, this.pass);
         if (userLogin != null) {
@@ -86,7 +83,7 @@ public class LoginController implements Serializable {
         email.setSSLOnConnect(true);
         email.setFrom("proyecto2ulatina@gmail.com");
         email.setSubject("Restablecer Contrasena");
-        email.setMsg("Su codigo de verificacion es: " + veriCode + " y expirará en 2 horas (not really...).\n");
+        email.setMsg("Su codigo de verificacion es: " + veriCode + " y expirara en 2 horas (not really...).\n");
         email.addTo(this.correo);
         email.send();
         return "NuevaContrasena";
@@ -94,9 +91,15 @@ public class LoginController implements Serializable {
 
     public String nuevaContra() {
         UsuarioDao usuerNewPass = new UsuarioDao();
-        usuerNewPass.nuevaContra(this.pass, this.correo);
-        usuerNewPass.desbloqueo(this.correo);
-        return "Login";
+        if(code.equals(veriCode)){
+            usuerNewPass.nuevaContra(this.pass, this.correo);
+            usuerNewPass.desbloqueo(this.correo);
+                return "Login";
+        }
+        else{
+            return "Landing";
+        }
+
     }
 
     public String getUser() {
