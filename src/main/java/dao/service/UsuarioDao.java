@@ -74,14 +74,14 @@ public class UsuarioDao implements IDao<Usuario> {
 
     }
 
-    public Usuario getUser(String name, String password) {
+    public Usuario getUser(String correo, String password) {
         Connection conn = conectorJDBC.conectar();
         PreparedStatement ps = null;
         ResultSet rs = null;
         Usuario userLogged = null;
         try {
-            ps = conn.prepareStatement("Select * from Persona where nombre=? and contrasena=? ");
-            ps.setString(1, name);
+            ps = conn.prepareStatement("Select * from Persona where correo=? and contrasena=? ");
+            ps.setString(1, correo);
             ps.setString(2, password);
             rs = ps.executeQuery();
             while (rs.next()) {
