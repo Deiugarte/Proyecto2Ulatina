@@ -33,12 +33,13 @@ public class LoginController implements Serializable {
 
     public String login() {
         UsuarioDao users = new UsuarioDao();
-        
-        if (users.isBlocked(this.user)) return "CuentaBloqueada";
-        else if (loginUserWithCredentials(users)) return "Bienvenida"; 
-        
-        
-        
+
+        if (users.isBlocked(this.user)) {
+            return "CuentaBloqueada";
+        } else if (loginUserWithCredentials(users)) {
+            return "Bienvenida";
+        }
+
         return "";
     }
 
