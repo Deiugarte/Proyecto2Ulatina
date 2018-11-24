@@ -29,6 +29,7 @@ public class LoginController implements Serializable {
     private boolean estado = false;
 
     public LoginController() {
+        
     }
 
     public String login() {
@@ -39,7 +40,6 @@ public class LoginController implements Serializable {
         } else if (loginUserWithCredentials(users)) {
             return "Bienvenida";
         }
-
         return "";
     }
 
@@ -94,10 +94,15 @@ public class LoginController implements Serializable {
     }
 
     public String nuevaContra() {
-        UsuarioDao usuerNewPass = new UsuarioDao();
-        usuerNewPass.nuevaContra(this.pass, this.correo);
-        usuerNewPass.desbloqueo(this.correo);
-        return "Login";
+        if (code.equals(veriCode)) {
+            UsuarioDao usuerNewPass = new UsuarioDao();
+            usuerNewPass.nuevaContra(this.pass, this.user);
+            usuerNewPass.desbloqueo(this.correo);
+            return "Login";
+        }
+        else{
+            return "ErrorContra";
+        }
     }
 
     public String getUser() {

@@ -18,9 +18,16 @@ public class Conector {
 
     private static final Logger LOG = LogManager.getLogger(Conector.class.getName());
     private final String DB_URL = "jdbc:mysql://db4free.net:3306/proy_2_ulatina";
+    
+    
     //  Database credentials
     private final String USER = "admin_proyecto";
     private final String PASS = "admin_proyecto";
+    
+//    private final String DB_URL = "jdbc:mysql://localhost:3306/proy_2_ulatina";
+//    //  Database credentials
+//    private final String USER = "root";
+//    private final String PASS = "root";
 
     private static Conector conector;
 

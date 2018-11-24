@@ -11,10 +11,6 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-/**
- *
- * @author José Pablo
- */
 public class UsuarioDao implements IDao<Usuario> {
 
     private final Conector conectorJDBC = Conector.getConector();
@@ -25,9 +21,7 @@ public class UsuarioDao implements IDao<Usuario> {
         Connection connectionDB = conectorJDBC.conectar();
         List<Usuario> usuarios = new ArrayList<>();
         try {
-
             System.out.println("Creating statement...");
-
             String sql;
             sql = "SELECT * FROM Persona;";
             PreparedStatement stmt = connectionDB.prepareStatement(sql);
@@ -100,17 +94,18 @@ public class UsuarioDao implements IDao<Usuario> {
         return userLogged;
     }
     
-    public boolean isBlocked(String nombre){
+    public boolean isBlocked(String correo){
         Connection conn = conectorJDBC.conectar();
         PreparedStatement ps = null;
         ResultSet rs = null;
         Boolean block = false;
         try {
-            ps = conn.prepareStatement("SELECT * FROM Persona WHERE nombre=?");
-            ps.setString(1, nombre);
+            ps = conn.prepareStatement("SELECT estado FROM Persona WHERE correo=?");
+            ps.setString(1, correo);
             rs = ps.executeQuery();
-            rs.next();
-            block = rs.getString("estado").equals("1");           
+            while(rs.next()){
+            block = rs.getBoolean("estado");
+            }
         } catch (SQLException ex) {
             LOG.error("Error al intentar leer datos.", ex);
         } finally {
@@ -118,13 +113,13 @@ public class UsuarioDao implements IDao<Usuario> {
         }
         return block;
     }
-
+    
     public void setEstado(boolean estado, String nombre) {
         Connection conn = conectorJDBC.conectar();
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = conn.prepareStatement("Update Persona set estado = ? where nombre = ?");
+            ps = conn.prepareStatement("Update Persona set estado = ? where correo = ?");
             ps.setBoolean(1, estado);
             ps.setString(2, nombre);
             ps.execute();
