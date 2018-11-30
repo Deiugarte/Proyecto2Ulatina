@@ -4,7 +4,6 @@ import dao.model.*;
 import dao.service.*;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -13,9 +12,10 @@ import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
-@ManagedBean(name = "loginController")
+
+@ManagedBean(name = "profileController")
 @SessionScoped
-public class LoginController implements Serializable {
+public class ProfileController implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
@@ -34,14 +34,11 @@ public class LoginController implements Serializable {
     private int intentos = 0; // para bloquear cuenta...
 
     private String user, pass;
-    private String nombre, ape, ape2, naci, sexo, tel;
     private boolean estado = false;   
     
     Usuario usuario = new Usuario();
     
-    public LoginController() {
-        
-    }
+ 
     
     public String login() {
         UsuarioDao users = new UsuarioDao();
@@ -49,7 +46,7 @@ public class LoginController implements Serializable {
         if (users.isBlocked(this.user)) {
             return "CuentaBloqueada";
         } else if (loginUserWithCredentials(users)) {
-            return "Profile";
+            return "Bienvenida";
         }
         return "";
     }
@@ -58,7 +55,6 @@ public class LoginController implements Serializable {
         FacesMessage msg;
         Usuario userLogin = users.getUser(this.user, this.pass);
         if (userLogin != null) {
-            usuario = userLogin;
             logeado = true;
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@", this.user);
             return true;
@@ -106,18 +102,13 @@ public class LoginController implements Serializable {
     }
 
     public String nuevaContra() {
-        if (code.equals(veriCode)) {          
-            if (this.pass.equals(this.auxPass)) {
-                UsuarioDao usuerNewPass = new UsuarioDao();
-                usuerNewPass.nuevaContra(this.pass, this.user);
-                usuerNewPass.desbloqueo(this.correo);
-                return "Login";
-            } else {
-                return "ErrorContra";
-            }
+        if (code.equals(veriCode)) {
+            UsuarioDao usuerNewPass = new UsuarioDao();
+            usuerNewPass.nuevaContra(this.pass, this.user);
+            usuerNewPass.desbloqueo(this.correo);
+            return "Login";
         }
-        
-        else {
+        else{
             return "ErrorContra";
         }
     }
@@ -176,14 +167,6 @@ public class LoginController implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
-    }
-    
-        public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
 }
