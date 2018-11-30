@@ -5,7 +5,7 @@
  */
 package dao.controller;
 
-import dao.controller.SearchResulSchema;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;

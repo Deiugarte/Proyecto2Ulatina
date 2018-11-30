@@ -5,7 +5,7 @@
  */
 package dao.controller;
 
-import dao.controller.SearchResulSchema;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
