@@ -104,7 +104,7 @@ public class UsuarioDao implements IDao<Usuario> {
             ps.setString(1, correo);
             rs = ps.executeQuery();
             while(rs.next()){
-            block = rs.getBoolean("estado");
+            block = !rs.getBoolean("estado");
             }
         } catch (SQLException ex) {
             LOG.error("Error al intentar leer datos.", ex);
@@ -154,7 +154,7 @@ public class UsuarioDao implements IDao<Usuario> {
         ResultSet rs = null;
         Usuario nuevaContra = null;
         try {
-            ps = conn.prepareStatement("Update Persona set estado = true where correo = ?");
+            ps = conn.prepareStatement("Update Persona set estado = 0 where correo = ?");
             ps.setString(1, correoVerification);
             ps.execute();
         } catch (SQLException e) {
