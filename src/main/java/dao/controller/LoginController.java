@@ -110,7 +110,7 @@ public class LoginController implements Serializable {
             if (this.pass.equals(this.auxPass)) {
                 UsuarioDao usuerNewPass = new UsuarioDao();
                 usuerNewPass.nuevaContra(this.pass, this.user);
-                usuerNewPass.desbloqueo(this.correo);
+                usuerNewPass.desbloqueo(this.user);
                 return "Login";
             } else {
                 return "ErrorContra";

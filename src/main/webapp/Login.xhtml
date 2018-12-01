@@ -23,7 +23,7 @@
         </div>
         <h:form id="loginForm">
             <p:messages id="messages" showDetail="true" closable="true" >
-                
+
             </p:messages>
             <p:growl id="msg" showDetail="true" life="4000" />
             <p:panel id="loginPnl" header="Login"
@@ -49,6 +49,13 @@
                     <p:commandButton id="recuperarButton" action="#{loginController.restablecerContrasena()}"
                                      value="Olvide mi contrasena" update="loginForm" ajax="true" style=" width: 225px; float: right;">
                     </p:commandButton>
+                </h:panelGrid>
+            </p:panel>
+            <p:spacer></p:spacer>
+            <p:panel id="signPnl" style="width: 300px; margin: 0 auto; height: 75px">
+                <h:panelGrid id="signPanel" columns="2" cellpadding="5">
+                    <h:outputText value="No tienes una cuenta?"></h:outputText>
+                    <h:link value="SignUp" outcome="signUp"></h:link>
                 </h:panelGrid>
             </p:panel>
             <p:blockUI block="loginPnl" trigger="loginButton" >

@@ -154,7 +154,7 @@ public class UsuarioDao implements IDao<Usuario> {
         ResultSet rs = null;
         Usuario nuevaContra = null;
         try {
-            ps = conn.prepareStatement("Update Persona set estado = 0 where correo = ?");
+            ps = conn.prepareStatement("Update Persona set estado = 1 where correo = ?");
             ps.setString(1, correoVerification);
             ps.execute();
         } catch (SQLException e) {
