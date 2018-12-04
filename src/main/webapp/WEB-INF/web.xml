@@ -20,13 +20,13 @@
     </session-config>
     <welcome-file-list>
 
-        <welcome-file>faces/Login.xhtml</welcome-file>
+        <welcome-file>faces/Landing.xhtml</welcome-file>
 
     </welcome-file-list>
     
     <context-param>
         <param-name>primefaces.THEME</param-name>
-        <param-value>le-frog</param-value>
+        <param-value>afterdark</param-value>
     </context-param>
     
 </web-app>
