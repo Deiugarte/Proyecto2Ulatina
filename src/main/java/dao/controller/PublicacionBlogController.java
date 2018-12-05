@@ -1,40 +1,37 @@
 package dao.controller;
 
 import dao.model.PublicacionBlog;
-import dao.model.Usuario;
-import dao.service.BlogDao;
-import dao.service.UsuarioDao;
+import dao.service.PublicacionBlogDao;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-/**
- *
- * @author blaken
- */
-@ManagedBean(name = "blogController")
+@ManagedBean(name = "publicacionBlogController")
 @SessionScoped
-public class BlogController implements Serializable {
+public class PublicacionBlogController implements Serializable {
     private int author;
     private String title, content;
     private Date creation;
 
-    public BlogController() {
+    public PublicacionBlogController() {
     }
 
-    public BlogController(int author, String title, String content, Date creation) {
+    public PublicacionBlogController(int author, String title, String content, Date creation) {
         this.author = author;
         this.title = title;
         this.content = content;
         this.creation = creation;
     }
 
-    public String test(){
-        BlogDao blogDao = new BlogDao();
-        return blogDao.buscarPublicaciones().get(0).getContent();
+    public void submitEntry(int auth){
+        author = auth;
+        
+        PublicacionBlogDao blogDao = new PublicacionBlogDao();
+        blogDao.nuevaPublicacion(new PublicacionBlog(this.author, this.title, this.content, java.sql.Timestamp.valueOf(java.time.LocalDateTime.now())));       
     }
+    
+    
     
     public int getAuthor() {
         return author;

@@ -27,7 +27,7 @@ public class UsuarioDao implements IDao<Usuario> {
             PreparedStatement stmt = connectionDB.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                usuarios.add(new Usuario(rs.getString("contrasena"), rs.getString("correo"),
+                usuarios.add(new Usuario(rs.getInt("id"), rs.getString("contrasena"), rs.getString("correo"),
                         rs.getString("nombre"), rs.getString("apellido"), rs.getString("segundoApellido"),
                         rs.getString("sexo"), rs.getString("telefono"),
                         rs.getDate("fechaNacimiento"), rs.getDouble("calificacion"), rs.getBoolean("estado")));
@@ -47,7 +47,10 @@ public class UsuarioDao implements IDao<Usuario> {
         Connection connectionDB = conectorJDBC.conectar();
         PreparedStatement ps = null;
         try {
-            ps = connectionDB.prepareStatement("INSERT INTO Persona (nombre, apellido, segundoApellido, contrasena, correo, fechaNacimiento, sexo, telefono, calificacion,estado)  values (?,?,?,?,?,?,?,?,?,?)");
+            ps = connectionDB.prepareStatement("INSERT INTO Persona "
+                    + "(nombre,apellido,segundoApellido,contrasena,correo,"
+                    + "fechaNacimiento,sexo,telefono,calificacion,estado)"
+                    + "values (?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getApellido());
             ps.setString(3, usuario.getSegundoApellido());
@@ -79,7 +82,7 @@ public class UsuarioDao implements IDao<Usuario> {
             ps.setString(2, password);
             rs = ps.executeQuery();
             while (rs.next()) {
-                userLogged = new Usuario(rs.getString("contrasena"), rs.getString("correo"),
+                userLogged = new Usuario(rs.getInt("id"), rs.getString("contrasena"), rs.getString("correo"),
                         rs.getString("nombre"), rs.getString("apellido"), rs.getString("segundoApellido"),
                         rs.getString("sexo"), rs.getString("telefono"),
                         rs.getDate("fechaNacimiento"), rs.getDouble("calificacion"), rs.getBoolean("estado"));

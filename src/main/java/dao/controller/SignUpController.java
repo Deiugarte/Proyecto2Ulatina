@@ -16,17 +16,18 @@ import javax.faces.bean.SessionScoped;
 public class SignUpController implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    int id;
     private String contra, correo, nombre, apellido, segundoApellido, sexo, telefono;
     private Date fechaNacimiento;
     private boolean estado = true;
 
     public SignUpController() {
+        
     }
 
     public String signUp() {
         UsuarioDao userDao = new UsuarioDao();
-        Usuario usuario = new Usuario(this.contra, this.correo, this.nombre, this.apellido, this.segundoApellido, this.sexo, this.telefono, this.fechaNacimiento, 0.0, this.estado);
+        Usuario usuario = new Usuario(this.id, this.contra, this.correo, this.nombre, this.apellido, this.segundoApellido, this.sexo, this.telefono, this.fechaNacimiento, 0.0, this.estado);
         userDao.insert(usuario);
         return "Login";
     }

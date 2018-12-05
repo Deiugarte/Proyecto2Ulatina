@@ -1,6 +1,6 @@
 package dao.model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -10,13 +10,13 @@ public class PublicacionBlog {
 
     private int author;
     private String title, content;
-    private Date creation;
+    private Timestamp creation;
         
     public PublicacionBlog() {
 
     }
 
-    public PublicacionBlog(int author, String title, String content, Date creation) {
+    public PublicacionBlog(int author, String title, String content, Timestamp creation) {
         this.author = author;
         this.title = title;
         this.content = content;
@@ -47,11 +47,11 @@ public class PublicacionBlog {
         this.content = content;
     }
 
-    public Date getCreation() {
+    public Timestamp getCreation() {
         return creation;
     }
 
-    public void setCreation(Date creation) {
+    public void setCreation(Timestamp creation) {
         this.creation = creation;
     }
     
