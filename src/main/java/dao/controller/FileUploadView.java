@@ -5,6 +5,7 @@
  */
 package dao.controller;
 
+import dao.model.Documentos;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
