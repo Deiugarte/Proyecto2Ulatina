@@ -4,7 +4,6 @@ import dao.model.*;
 import dao.service.*;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -33,6 +32,7 @@ public class LoginController implements Serializable {
     
     private int intentos = 0; // para bloquear cuenta...
 
+    private int id;
     private String user, pass;
     private String nombre, ape, ape2, naci, sexo, tel;
     private boolean estado = false;   
@@ -49,7 +49,7 @@ public class LoginController implements Serializable {
         if (users.isBlocked(this.user)) {
             return "CuentaBloqueada";
         } else if (loginUserWithCredentials(users)) {
-            return "Profile";
+            return "nuevaPublicacion";
         }
         return "";
     }
@@ -59,6 +59,7 @@ public class LoginController implements Serializable {
         Usuario userLogin = users.getUser(this.user, this.pass);
         if (userLogin != null) {
             usuario = userLogin;
+            id = usuario.getId();
             logeado = true;
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@", this.user);
             return true;
@@ -121,6 +122,16 @@ public class LoginController implements Serializable {
             return "ErrorContra";
         }
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
 
     public String getUser() {
         return user;

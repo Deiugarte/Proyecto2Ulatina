@@ -18,7 +18,9 @@ public class Usuario {
 
     }
 
+
     public Usuario(String contra, String correo, String nombre, String apellido, String segundoApellido, String sexo, String telefono, Date fechaNacimiento, double calificacion, boolean estado, int id) {
+
         this.contra = contra;
         this.correo = correo;
         this.nombre = nombre;
@@ -32,6 +34,15 @@ public class Usuario {
         this.id = id;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
     public String getContra() {
         return contra;
     }
