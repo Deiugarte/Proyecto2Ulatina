@@ -17,11 +17,10 @@ public class UsuarioDao implements IDao<Usuario> {
     private static final Logger LOG = LogManager.getLogger(UsuarioDao.class.getName());
 
     @Override
-    public List<Usuario> buscarUsuarios() {
+    public List<Usuario> buscar() {
         Connection connectionDB = conectorJDBC.conectar();
         List<Usuario> usuarios = new ArrayList<>();
         try {
-            System.out.println("Creating statement...");
             String sql;
             sql = "SELECT * FROM Persona;";
             PreparedStatement stmt = connectionDB.prepareStatement(sql);
@@ -30,7 +29,7 @@ public class UsuarioDao implements IDao<Usuario> {
                 usuarios.add(new Usuario(rs.getString("contrasena"), rs.getString("correo"),
                         rs.getString("nombre"), rs.getString("apellido"), rs.getString("segundoApellido"),
                         rs.getString("sexo"), rs.getString("telefono"),
-                        rs.getDate("fechaNacimiento"), rs.getDouble("calificacion"), rs.getBoolean("estado")));
+                        rs.getDate("fechaNacimiento"), rs.getDouble("calificacion"), rs.getBoolean("estado"),rs.getInt("id")));
             }
             rs.close();
             stmt.close();
@@ -43,11 +42,11 @@ public class UsuarioDao implements IDao<Usuario> {
     }
 
     @Override
-    public void insert(Usuario usuario) {
+    public int insert(Usuario usuario) {
         Connection connectionDB = conectorJDBC.conectar();
         PreparedStatement ps = null;
         try {
-            ps = connectionDB.prepareStatement("INSERT INTO Persona (nombre, apellido, segundoApellido, contrasena, correo, fechaNacimiento, sexo, telefono, calificacion,estado)  values (?,?,?,?,?,?,?,?,?,?)");
+            ps = connectionDB.prepareStatement("INSERT INTO Persona (nombre, apellido, segundoApellido, contrasena, correo, fechaNacimiento, sexo, telefono, calificacion,estado,id)  values (?,?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getApellido());
             ps.setString(3, usuario.getSegundoApellido());
@@ -58,6 +57,7 @@ public class UsuarioDao implements IDao<Usuario> {
             ps.setString(8, usuario.getTelefono());
             ps.setDouble(9, usuario.getCalificacion());
             ps.setBoolean(10, true);
+            ps.setInt(11, usuario.getId());
             ps.executeUpdate();
 
         } catch (SQLException ex) {
@@ -65,7 +65,7 @@ public class UsuarioDao implements IDao<Usuario> {
         } finally {
             conectorJDBC.cerrarConexion(connectionDB, ps, null);
         }
-
+        return 0;
     }
 
     public Usuario getUser(String correo, String password) {
@@ -82,7 +82,7 @@ public class UsuarioDao implements IDao<Usuario> {
                 userLogged = new Usuario(rs.getString("contrasena"), rs.getString("correo"),
                         rs.getString("nombre"), rs.getString("apellido"), rs.getString("segundoApellido"),
                         rs.getString("sexo"), rs.getString("telefono"),
-                        rs.getDate("fechaNacimiento"), rs.getDouble("calificacion"), rs.getBoolean("estado"));
+                        rs.getDate("fechaNacimiento"), rs.getDouble("calificacion"), rs.getBoolean("estado"),rs.getInt("id"));
             }
             System.out.println(userLogged.getNombre());
             return userLogged;
@@ -167,12 +167,12 @@ public class UsuarioDao implements IDao<Usuario> {
 
     @Override
     public void delete(Usuario data) {
-
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void update(Usuario data) {
-
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

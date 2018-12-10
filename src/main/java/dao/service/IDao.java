@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface IDao<T> {
     
-    public List<T> buscarUsuarios();
+    public List<T> buscar();
     
-    public void insert(T data);
+    public int insert(T data);
 
     public void delete(T data);
 

@@ -17,6 +17,7 @@ public class SignUpController implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private int id;
     private String contra, correo, nombre, apellido, segundoApellido, sexo, telefono;
     private Date fechaNacimiento;
     private boolean estado = true;
@@ -26,7 +27,7 @@ public class SignUpController implements Serializable {
 
     public String signUp() {
         UsuarioDao userDao = new UsuarioDao();
-        Usuario usuario = new Usuario(this.contra, this.correo, this.nombre, this.apellido, this.segundoApellido, this.sexo, this.telefono, this.fechaNacimiento, 0.0, this.estado);
+        Usuario usuario = new Usuario(this.contra, this.correo, this.nombre, this.apellido, this.segundoApellido, this.sexo, this.telefono, this.fechaNacimiento, 0.0, this.estado,this.id);
         userDao.insert(usuario);
         return "Login";
     }
@@ -101,6 +102,14 @@ public class SignUpController implements Serializable {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }
