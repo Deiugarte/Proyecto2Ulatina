@@ -7,7 +7,8 @@ import java.util.Date;
  * @author José Pablo
  */
 public class Usuario {
-    int id;
+
+    private int id;
     private String contra, correo, nombre, apellido, segundoApellido, sexo, telefono;
     private Date fechaNacimiento;
     private double calificacion;
@@ -17,8 +18,9 @@ public class Usuario {
 
     }
 
-    public Usuario(int id, String contra, String correo, String nombre, String apellido, String segundoApellido, String sexo, String telefono, Date fechaNacimiento, double calificacion, boolean estado) {
-        this.id = id;
+
+    public Usuario(String contra, String correo, String nombre, String apellido, String segundoApellido, String sexo, String telefono, Date fechaNacimiento, double calificacion, boolean estado, int id) {
+
         this.contra = contra;
         this.correo = correo;
         this.nombre = nombre;
@@ -29,6 +31,7 @@ public class Usuario {
         this.fechaNacimiento = fechaNacimiento;
         this.calificacion = calificacion;
         this.estado = estado;
+        this.id = id;
     }
 
     public int getId() {
@@ -120,11 +123,17 @@ public class Usuario {
         this.estado = estado;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" + "contra=" + contra + ", correo=" + correo + ", nombre=" + nombre + ", apellido=" + apellido + ", segundoApellido=" + segundoApellido + ", sexo=" + sexo + ", telefono=" + telefono + ", fechaNacimiento=" + fechaNacimiento + ", calificacion=" + calificacion + ", estado=" + estado + '}';
     }
-
-    
 
 }

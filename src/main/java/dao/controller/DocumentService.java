@@ -6,6 +6,8 @@
 package dao.controller;
 
 
+import dao.model.Documentos;
+import dao.model.SearchResulSchema;
 import java.util.List;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;

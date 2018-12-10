@@ -6,6 +6,8 @@
 package dao.controller;
 
 
+import dao.model.Documentos;
+import dao.model.SearchResulSchema;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;
