@@ -8,6 +8,8 @@
     <packaging>war</packaging>
 
     <name>proyecto</name>
+    
+  
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -121,6 +123,7 @@
                     </execution>
                 </executions>
             </plugin>
+            
         </plugins>
     </build>
     <repositories>
@@ -131,4 +134,19 @@
             <name>Repository for library PrimeFaces-maven-lib</name>
         </repository>
     </repositories>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>lastest</version>
+                <configuration>
+                    <configLocation>sun_checks.xml</configLocation>
+                </configuration>
+                
+            </plugin>
+            
+            
+        </plugins>
+    </reporting>
 </project>
