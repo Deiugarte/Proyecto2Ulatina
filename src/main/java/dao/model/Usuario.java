@@ -123,14 +123,6 @@ public class Usuario {
         this.estado = estado;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
         return "Usuario{" + "contra=" + contra + ", correo=" + correo + ", nombre=" + nombre + ", apellido=" + apellido + ", segundoApellido=" + segundoApellido + ", sexo=" + sexo + ", telefono=" + telefono + ", fechaNacimiento=" + fechaNacimiento + ", calificacion=" + calificacion + ", estado=" + estado + '}';
