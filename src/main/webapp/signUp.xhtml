@@ -7,62 +7,90 @@
     <h:head>
         <title>Registro de nueva cuenta</title>
     </h:head>
+    <script type="text/javascript">
+        PrimeFaces.locales['es'] = {
+            closeText: 'Cerrar',
+            prevText: 'Anterior',
+            nextText: 'Siguiente',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+            dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+            weekHeader: 'Semana',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            timeOnlyTitle: 'Sólo hora',
+            timeText: 'Tiempo',
+            hourText: 'Hora',
+            minuteText: 'Minuto',
+            secondText: 'Segundo',
+            currentText: 'Fecha actual',
+            ampm: false,
+            month: 'Mes',
+            week: 'Semana',
+            day: 'Día',
+            allDayText: 'Todo el día'
+        };
+    </script>
     <h:body>
         <div id="message">
-	<p:ajaxStatus style="display:block;  margin-top:.5em;">
-		<f:facet name="default">
-			<h:outputText value="Por favor ingresa tus datos" />
-		</f:facet>
-		<f:facet name="start">
-			<h:outputText value=" #{signUpController.nombre} estamos creando tu cuenta" />
-		</f:facet>
-		<f:facet name="complete">
-			<h:outputText value="Intentalo de nuevo #{signUpController.nombre} hubo un problema" />
-		</f:facet>
-	</p:ajaxStatus>
-	</div>	
+            <p:ajaxStatus style="display:block;  margin-top:.5em;">
+                <f:facet name="default">
+                    <h:outputText value="Por favor ingresa tus datos" />
+                </f:facet>
+                <f:facet name="start">
+                    <h:outputText value=" #{signUpController.nombre} estamos creando tu cuenta" />
+                </f:facet>
+                <f:facet name="complete">
+                    <h:outputText value="Intentalo de nuevo #{signUpController.nombre} hubo un problema" />
+                </f:facet>
+            </p:ajaxStatus>
+        </div>	
         <h:form id="signUpForm">
-		<p:growl id="msg" showDetail="true" life="4000" />
-		<p:panel id="signUpPnl" header="Registro de cuenta"
-			style="width: 500px; margin: 0 auto;">
-			<h:panelGrid id="signUpPanel" columns="2" cellpadding="5">
-				<h:outputText value="Nombre" />
-				<p:inputText id="nombre" value="#{signUpController.nombre}"></p:inputText>
-				<p:spacer /><p:spacer />
-                                <h:outputText value="Apellido" />
-				<p:inputText id="apellido" value="#{signUpController.apellido}"></p:inputText>
-				<p:spacer /><p:spacer />	
-                                <h:outputText value="Segundo Apellido" />
-				<p:inputText id="segundoApellido" value="#{signUpController.segundoApellido}"></p:inputText>
-				<p:spacer /><p:spacer />
-				<h:outputText value="Contraseña" />
-				<p:password id="password" value="#{signUpController.contra}" feedback="true" promptLabel="Por favor ingrese su contraseña" weakLabel="Contraseña debil"
+            <p:growl id="msg" showDetail="true" life="4000" />
+            <p:panel id="signUpPnl" header="Registro de cuenta"
+                     style="width: 500px; margin: 0 auto;">
+                <h:panelGrid id="signUpPanel" columns="2" cellpadding="5">
+                    <h:outputText value="Nombre" />
+                    <p:inputText id="nombre" value="#{signUpController.nombre}"></p:inputText>
+                    <p:spacer /><p:spacer />
+                    <h:outputText value="Apellido" />
+                    <p:inputText id="apellido" value="#{signUpController.apellido}"></p:inputText>
+                    <p:spacer /><p:spacer />	
+                    <h:outputText value="Segundo Apellido" />
+                    <p:inputText id="segundoApellido" value="#{signUpController.segundoApellido}"></p:inputText>
+                    <p:spacer /><p:spacer />
+                    <h:outputText value="Contraseña" />
+                    <p:password id="password" value="#{signUpController.contra}" feedback="true" promptLabel="Por favor ingrese su contraseña" weakLabel="Contraseña debil"
                                 goodLabel="Contraseña regular" strongLabel="Contraseña fuerte" ></p:password>
-                                <p:spacer /><p:spacer />
-                                <h:outputText value="Correo" />
-				<p:inputText id="correo" value="#{signUpController.correo}">
-                                    <f:validator validatorId="custom.emailValidator" />
-                                </p:inputText>
-				<p:spacer /><p:spacer />	
-                                <h:outputText value="Sexo" />
-				<p:inputText id="sexo" value="#{signUpController.sexo}"></p:inputText>
-				<p:spacer /><p:spacer />	
-                                <h:outputText value="Telefono" />
-				<p:inputMask id="telefono" value="#{signUpController.telefono}" mask="9999-9999"></p:inputMask>
-				<p:spacer /><p:spacer />	
-                                <h:outputText value="Fecha de Nacimiento" />
-                                <p:calendar id="fechaNacimiento" value="#{signUpController.fechaNacimiento}" showOn="button" />
-			</h:panelGrid>
-			<h:panelGrid columns="1" cellpadding="10" width="100%">
-				<p:commandButton id="signUpButton" action="#{signUpController.signUp}"
-					value="Crear Cuenta" update="signUpForm" ajax="true" style="float: right;">
-				</p:commandButton>
-			</h:panelGrid>
-		</p:panel>
-		<p:blockUI block="signUpPnl" trigger="signUpButton" >
-			<p:graphicImage library="resources" name="loading.gif" />
-		</p:blockUI>
-	</h:form>
+                    <p:spacer /><p:spacer />
+                    <h:outputText value="Correo" />
+                    <p:inputText id="correo" value="#{signUpController.correo}">
+                        <f:validator validatorId="custom.emailValidator" />
+                    </p:inputText>
+                    <p:spacer /><p:spacer />	
+                    <h:outputText value="Sexo" />
+                    <p:inputText id="sexo" value="#{signUpController.sexo}"></p:inputText>
+                    <p:spacer /><p:spacer />	
+                    <h:outputText value="Telefono" />
+                    <p:inputMask id="telefono" value="#{signUpController.telefono}" mask="9999-9999"></p:inputMask>
+                    <p:spacer /><p:spacer />	
+                    <h:outputText value="Fecha de Nacimiento" />
+                    <p:calendar id="fechaNacimiento" value="#{signUpController.fechaNacimiento}" showOn="button" locale="es" />
+                </h:panelGrid>
+                <h:panelGrid columns="1" cellpadding="10" width="100%">
+                    <p:commandButton id="signUpButton" action="#{signUpController.signUp}"
+                                     value="Crear Cuenta" update="signUpForm" ajax="true" style="float: right;">
+                    </p:commandButton>
+                </h:panelGrid>
+            </p:panel>
+            <p:blockUI block="signUpPnl" trigger="signUpButton" >
+                <p:graphicImage library="resources" name="loading.gif" />
+            </p:blockUI>
+        </h:form>
     </h:body>
 </html>
 
