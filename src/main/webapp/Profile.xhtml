@@ -42,6 +42,13 @@
                     <h:outputText value="ID: "/>
                     <h:outputText value="#{loginController.usuario.id}"/>
                 </h:panelGrid>
+                <br/> 
+                <p:button outcome="Foro" value="  Foro " icon="ui-icon-star" disabled="false" iconPos="right">
+                    <f:param name="foroM" value="50" />
+                </p:button><br/> 
+                <p:button outcome="ForoPregunta" value="  Foro Pregunta " icon="ui-icon-star" disabled="false" iconPos="right">
+                    <f:param name="foroP" value="50" />
+                </p:button><br/> 
             </p:panel>
         </h:form>
     </h:body>

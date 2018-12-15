@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Foros</title>
+    </h:head>
+    <h:body>
+        <h:form id="crearForoForm">
+            <p:panel id="crearForPnl" header="Foro"
+                     style="width: 1000px;margin: 0 auto;">
+                <h:panelGrid id="creForPanel" columns="1" cellpadding="5">
+                    <h:outputText value="Titulo"/>
+                    <p:inputText id="Titulof" value="#{foroController.titulo}"></p:inputText>
+                    <p:spacer/>
+                    <p:spacer/>
+                    <h:outputText value="Realizar pregunta" style="margin-left: 0px "/>
+                    <p:inputTextarea rows="5" cols="30" autoResize="false" value="#{foroController.pregunta}" />
+                    <br/>
+                    <p:spacer/>
+                    <h:outputText value="Autor"/>
+                    <h:outputText id="Autorf" value="#{loginController.usuario.id}" ></h:outputText>
+                    <p:spacer/>
+                    <h:outputText value="Fecha" />
+                    <p:calendar id="FechaPreg" value="#{foroController.fecha}" showOn="button" />
+                    <p:spacer/>
+                    <h:panelGrid id="crearPregunta" columns="1" cellpadding="5" style="margin: 0 auto;">
+                        <p:commandButton id="ForoButton" action="#{foroController.crearForo(loginController.usuario.id)}" value="Subir" ></p:commandButton>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
+

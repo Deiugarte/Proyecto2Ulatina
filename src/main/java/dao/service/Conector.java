@@ -13,7 +13,7 @@ import org.apache.logging.log4j.LogManager;
 public class Conector {
 
     private static final Logger LOG = LogManager.getLogger(Conector.class.getName());
-    private final String DB_URL = "jdbc:mysql://db4free.net:3306/proy_2_ulatina";
+    private final String DB_URL = "jdbc:mysql://db4free.net:3306/proy_2_ulatina?useSSL=false";
     
     
   //Database credentials
