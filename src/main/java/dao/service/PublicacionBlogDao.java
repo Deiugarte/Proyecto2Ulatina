@@ -21,12 +21,21 @@ public class PublicacionBlogDao {
         try {
             System.out.println("Creating statement...");
             String sql;
-            sql = "SELECT * FROM publicacion_blog;";
+            sql = "SELECT  \n"
+                    + "	pub.title, pub.content,pub.creation_date, per.nombre\n"
+                    + "\n"
+                    + "FROM\n"
+                    + "\n"
+                    + "	persona per\n"
+                    + "JOIN\n"
+                    + "	publicacion_blog pub\n"
+                    + "ON\n"
+                    + "	per.id = pub.author;";
             PreparedStatement stmt = connectionDB.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                publicaciones.add(new PublicacionBlog(rs.getInt("author"), rs.getString("title"),
-                        rs.getString("content"), rs.getTimestamp("creation_date")));
+                publicaciones.add(new PublicacionBlog(rs.getString("title"),
+                        rs.getString("content"),rs.getString("nombre"), rs.getTimestamp("creation_date")));
             }
             rs.close();
             stmt.close();
@@ -37,40 +46,38 @@ public class PublicacionBlogDao {
         }
         return publicaciones;
     }
-    
-        public List<PublicacionBlog> buscarPublicacionesPorCorreo(String correo) {
-        Connection connectionDB = conectorJDBC.conectar();
+
+    public List<PublicacionBlog> buscarPublicacionesPorTitulo(String title) {
+        Connection conn = conectorJDBC.conectar();
         List<PublicacionBlog> publicaciones = new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
         try {
-            System.out.println("Creating statement...");
-            String sql;
-            sql = "SELECT * FROM publicacion_blog WHERE correo = ?;";
-            PreparedStatement stmt = connectionDB.prepareStatement(sql);
-             stmt.setString(1, correo);
-            ResultSet rs = stmt.executeQuery(sql);
+            ps = conn.prepareStatement("select publi.title, publi.content, per.nombre, publi.creation_date from publicacion_blog AS publi, Persona AS per where publi.author = per.id AND publi.title = ?;");
+            ps.setString(1, title);
+            rs = ps.executeQuery();
             while (rs.next()) {
-                publicaciones.add(new PublicacionBlog(rs.getInt("author"), rs.getString("title"),
-                        rs.getString("content"), rs.getTimestamp("creation_date")));
+                publicaciones.add(new PublicacionBlog(rs.getString("title"),
+                        rs.getString("content"), rs.getString("nombre"), rs.getTimestamp("creation_date")));
             }
-            rs.close();
-            stmt.close();
-            conectorJDBC.cerrarConexion(connectionDB, stmt, null);
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            conectorJDBC.cerrarConexion(conn, ps, rs);
         }
         return publicaciones;
     }
 
-        
-    public  void nuevaPublicacion(PublicacionBlog publicacion) {
+    public void nuevaPublicacion(PublicacionBlog publicacion) {
         Connection connectionDB = conectorJDBC.conectar();
         PreparedStatement ps = null;
         try {
             ps = connectionDB.prepareStatement("INSERT INTO publicacion_blog (title, content, author, creation_date) VALUES (?,?,?,?);");
             ps.setString(1, publicacion.getTitle());
             ps.setString(2, publicacion.getContent());
-            ps.setInt(3,publicacion.getAuthor());
+            ps.setInt(3, publicacion.getAuthor());
             ps.setTimestamp(4, publicacion.getCreation());
             ps.executeUpdate();
         } catch (SQLException ex) {
@@ -78,5 +85,5 @@ public class PublicacionBlogDao {
         } finally {
             conectorJDBC.cerrarConexion(connectionDB, ps, null);
         }
-    }              
+    }
 }

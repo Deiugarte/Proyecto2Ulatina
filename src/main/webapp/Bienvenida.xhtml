@@ -12,7 +12,7 @@
     <h:body>
         <p:layout style="min-width:400px;min-height:500px;background-color: antiquewhite" styleClass="complex">
             <p:layoutUnit  position="west" resizable="true" size="200" minSize="40" maxSize="400">
-                <h3>Bienvenido al sistema #{loginController.user}</h3>
+                <h3>Bienvenido al sistema, #{loginController.usuario.nombre}</h3>
 
                 <p:button style="width:120px;height:120px" outcome="Bienvenida" value="  Mi Perfil " icon="ui-icon-star" iconPos="right">
                     <f:param name="1" value="50" />
@@ -25,7 +25,7 @@
                     <f:param name="3 Landing" value="30" />
                 </p:button><br/> 
 
-                <p:button style="width:120px;height:120px" outcome="Bienvenida" value=" Bloq " icon="ui-icon-wrench" iconPos="right">
+                <p:button style="width:120px;height:120px" outcome="Blog" value=" Blog " icon="ui-icon-wrench" iconPos="right" >
                     <f:param name="4" value="30" />
                 </p:button><br/> 
                 <p:button style="width:120px;height:120px" outcome="Login" value="Salir" icon="ui-icon-wrench" iconPos="right">
