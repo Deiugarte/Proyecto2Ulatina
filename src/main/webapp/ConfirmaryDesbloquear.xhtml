@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Desbloqueo de Cuenta</title>
+    </h:head>
+    <h:body>
+        <h:form id="desbloqueoForm">
+            <p:growl id="msg_debloqueo" showDetail="true" life="3000"/>
+            <p:panel id="debloqueoPnl" header="Restablecimiento de Contrasena"
+                     style="width: 500px; margin: 0 auto; height: 250px"> 
+                <h:panelGrid id="debloqueoPanel" columns="2" cellpadding="5">
+                    <h:outputText value="Codigo Verificacion"/>
+                    <p:inputText id="Correo" value="#{loginController.veriCode}"></p:inputText>
+                    <h:outputText value="Digite su nueva contraseña "/>
+                    <p:inputText id="viejaContra" value="#{loginController.pass}"></p:inputText>
+                    <h:outputText value="Digite su nueva contrasena "/>
+                    <p:inputText id="newContra" value="#{loginController.auxPass}"></p:inputText>
+                </h:panelGrid>
+                <h:panelGrid id="enterContra" columns="1" cellpadding="5" width="100%" style=" width: 100px; margin: 0 auto;">
+                    <p:commandButton id="desbloqueoCuenta" action="#{loginController.nuevaContra()}"
+                                     value="Enter" ajax="false" style="float: top">                 
+                    </p:commandButton>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
+

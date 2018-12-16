@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Inicio</title>
+        <link rel="icon" href="./resources/favicon-16x16.ico"></link>
+    </h:head>
+    <h:body>
+        <h:form style="background-color:darkgreen" id="landingForm">
+
+            <p:layout style="min-width:800px;min-height:735px;background-color: antiquewhite">
+                <p:layoutUnit  position="west" resizable="true" size="300" minSize="40" maxSize="400">
+                    Menú<br/> 
+                    <br/> 
+                    <p:button outcome="Landing" value="  Inicio " icon="ui-icon-star" disabled="true" iconPos="right">
+                        <f:param name="InicioLanding" value="50" />
+                    </p:button><br/> 
+                    <p:button outcome="Login" value="  Login  " icon="ui-icon-search" iconPos="right">
+                        <f:param name="LoginLanding" value="50" />
+                    </p:button><br/> 
+
+                    <p:button outcome="signUp" value="Sign Up" icon="ui-icon-person" iconPos="right">
+                        <f:param name="SignUp Landing" value="30" />
+                    </p:button><br/> 
+                    
+                     <p:button outcome="upload" value="Documentos" icon="ui-icon-script" iconPos="right">
+                        <f:param name="Documentos" value="30" />
+                    </p:button><br/> 
+
+                    <p:button outcome="Landing" value="Options" icon="ui-icon-wrench" iconPos="right">
+                        <f:param name="OptionsLanding" value="30" />
+                    </p:button><br/> 
+                    <br/> 
+                    <p:graphicImage value="resources/Icono.jpg" />
+                </p:layoutUnit>
+                 
+                <p:layoutUnit  position="east" resizable="true" size="300" minSize="40" maxSize="400">
+                    <div class="about">
+                        About <br/>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                            It has survived not only five centuries, but also the leap into electronic typesetting, 
+                            remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets 
+                            containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker 
+                            including versions of Lorem Ipsum
+                    </div>
+                    
+                    <p:graphicImage value="resources/Icono.jpg" />
+                </p:layoutUnit>
+                <p:layoutUnit position="center">
+                    <p:galleria value="#{landing.images}" var="image" panelWidth="895" panelHeight="665" showCaption="false" style="width: 350px; margin: 0 auto;">
+                        <p:graphicImage library="images" name="#{image}" alt="Image Description for #{image}" title="#{image}"/>
+                    </p:galleria>
+                </p:layoutUnit>
+            </p:layout>
+        </h:form>
+    </h:body>
+</html>
+
