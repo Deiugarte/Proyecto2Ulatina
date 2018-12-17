@@ -14,7 +14,9 @@
             }
         </style>
         <h:form id="form">
-            <p:dataGrid var="pub" value="#{publicacionBlogController.buscarPublicacionesPorAutor(loginController.user)}" columns="3" layout="grid"
+            <h:inputText binding="#{val}" />
+            <p:commandButton update="pubs" value="Test" action="#{publicacionBlogOtrosUsuariosController.buscarPublicacionesPorAutor(loginController.user)}" />
+            <p:dataGrid var="pub" columns="3" layout="grid"
                         rows="12" paginator="true" id="pubs"
                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                         rowsPerPageTemplate="6,12,16">
@@ -28,7 +30,7 @@
 
                         <p:commandLink update=":form:pubDetail" oncomplete="PF('pubDialog').show()" title="View Detail">
                             <h:outputText value="Abrir," styleClass="pi pi-search" style="margin:0 auto;"/>
-                            <f:setPropertyActionListener value="#{pub}" target="#{publicacionBlogController.selectedPub}" />
+                            <f:setPropertyActionListener value="#{pub}" target="#{publicacionBlogOtrosUsuariosController.selectedPub}" />
                         </p:commandLink>
                     </h:panelGrid>
                 </p:panel>
@@ -36,15 +38,15 @@
 
             <p:dialog header="Detalles de Publicacion" widgetVar="pubDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                 <p:outputPanel id="pubDetail" style="text-align:center;">
-                    <p:panelGrid  columns="2" rendered="#{not empty publicacionBlogController.selectedPub}" columnClasses="label,value">
+                    <p:panelGrid  columns="2" rendered="#{not empty publicacionBlogOtrosUsuariosController.selectedPub}" columnClasses="label,value">
                         <h:outputText value="Titulo:" />
-                        <h:outputText value="#{publicacionBlogController.selectedPub}" />
+                        <h:outputText value="#{publicacionBlogOtrosUsuariosController.selectedPub}" />
 
                         <h:outputText value="Autor:" />
-                        <h:outputText value="#{publicacionBlogController.selectedPub.creation}" />
+                        <h:outputText value="#{publicacionBlogOtrosUsuariosController.selectedPub.creation}" />
 
                         <h:outputText value="Contenido:" />
-                        <h:outputText value="#{publicacionBlogController.selectedPub.content}"/>
+                        <h:outputText value="#{publicacionBlogOtrosUsuariosController.selectedPub.content}"/>
                     </p:panelGrid>
                 </p:outputPanel>
             </p:dialog>

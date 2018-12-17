@@ -11,27 +11,21 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import org.primefaces.event.SelectEvent;
 
-@ManagedBean(name = "publicacionBlogController")
+@ManagedBean(name = "publicacionBlogOtrosUsuariosController")
 @SessionScoped
-public class PublicacionBlogController implements Serializable {
+public class PublicacionBlogOtrosUsuariosController implements Serializable {
 
     private int author;
     private String title, content, nombre, value;
     private Date creation;
     private List<PublicacionBlog> blogs = new ArrayList<>();
     private PublicacionBlog selectedPub;
-
-    public PublicacionBlogController(){
-        
-    }
-
     
-    @PostConstruct
-    public void cargar() {
-        this.buscarPublicacionesPorAutor(this.nombre);
+    public PublicacionBlogOtrosUsuariosController() {
+    
     }
     
-    public PublicacionBlogController(int author, String title, String content, Date creation) {
+    public PublicacionBlogOtrosUsuariosController(int author, String title, String content, Date creation) {
         this.author = author;
         this.title = title;
         this.content = content;

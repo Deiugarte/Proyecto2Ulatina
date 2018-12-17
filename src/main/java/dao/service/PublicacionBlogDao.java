@@ -16,21 +16,23 @@ public class PublicacionBlogDao {
     private static final Logger LOG = LogManager.getLogger(UsuarioDao.class.getName());
 
     public List<PublicacionBlog> buscarPublicaciones() {
+        //Carga pubs en orden DESC de CREATION_DATE;
         Connection connectionDB = conectorJDBC.conectar();
         List<PublicacionBlog> publicaciones = new ArrayList<>();
         try {
             System.out.println("Creating statement...");
             String sql;
-            sql = "SELECT  \n"
-                    + "	pub.title, pub.content,pub.creation_date, per.nombre\n"
-                    + "\n"
-                    + "FROM\n"
-                    + "\n"
-                    + "	persona per\n"
-                    + "JOIN\n"
-                    + "	publicacion_blog pub\n"
-                    + "ON\n"
-                    + "	per.id = pub.author;";
+            sql = "SELECT "
+                    + "pub.title, pub.content,pub.creation_date, per.nombre "
+                    + "FROM "
+                    + "persona per "
+                    + "JOIN "
+                    + "publicacion_blog pub "
+                    + "ON "
+                    + "per.id = pub.author "
+                    + "ORDER BY "
+                    + "creation_date DESC;";
+            
             PreparedStatement stmt = connectionDB.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
@@ -46,16 +48,16 @@ public class PublicacionBlogDao {
         }
         return publicaciones;
     }
-
-    public List<PublicacionBlog> buscarPublicacionesPorTitulo(String title) {
+    
+    public List<PublicacionBlog> buscarPublicacionesPorAutor(String author) {
         Connection conn = conectorJDBC.conectar();
         List<PublicacionBlog> publicaciones = new ArrayList<>();
         PreparedStatement ps = null;
         ResultSet rs = null;
 
         try {
-            ps = conn.prepareStatement("select publi.title, publi.content, per.nombre, publi.creation_date from publicacion_blog AS publi, Persona AS per where publi.author = per.id AND publi.title = ?;");
-            ps.setString(1, title);
+            ps = conn.prepareStatement("select publi.title, publi.content, per.nombre, publi.creation_date from publicacion_blog AS publi, Persona AS per where publi.author = per.id AND per.correo = ?;");
+            ps.setString(1, author);
             rs = ps.executeQuery();
             while (rs.next()) {
                 publicaciones.add(new PublicacionBlog(rs.getString("title"),
