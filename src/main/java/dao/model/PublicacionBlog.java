@@ -9,9 +9,9 @@ import java.sql.Timestamp;
 public class PublicacionBlog {
 
     private int author;
-    private String title, content;
+    private String title, content, nombre;
     private Timestamp creation;
-        
+
     public PublicacionBlog() {
 
     }
@@ -20,6 +20,13 @@ public class PublicacionBlog {
         this.author = author;
         this.title = title;
         this.content = content;
+        this.creation = creation;
+    }
+    
+    public PublicacionBlog(String title, String content, String nombre, Timestamp creation){
+        this.title = title;
+        this.content = content;
+        this.nombre = nombre;
         this.creation = creation;
     }
 
@@ -54,6 +61,13 @@ public class PublicacionBlog {
     public void setCreation(Timestamp creation) {
         this.creation = creation;
     }
-    
-    
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
 }

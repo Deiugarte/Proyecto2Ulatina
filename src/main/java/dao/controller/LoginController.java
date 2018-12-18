@@ -49,7 +49,7 @@ public class LoginController implements Serializable {
         if (users.isBlocked(this.user)) {
             return "CuentaBloqueada";
         } else if (loginUserWithCredentials(users)) {
-            return "nuevaPublicacion";
+            return "Bienvenida";
         }
         return "";
     }
