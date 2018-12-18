@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Blogs</title>
+    </h:head>
+    <h:body> 
+        <style type="text/css">
+            .value {
+                font-weight: bold;
+            }
+        </style>
+        <h:form id="form">
+            <p:dataGrid var="pub" value="#{publicacionBlogController.buscarPublicacionesPorAutor(loginController.user)}" columns="3" layout="grid"
+                        rows="12" paginator="true" id="pubs"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="6,12,16">
+                <f:facet name="header">
+                    Publicaciones
+                </f:facet>
+                <p:panel header="#{pub.title}" style="text-align:center">
+                    <h:panelGrid columns="1" style="width:100%">
+                        <h:outputText value="Autor: #{pub.nombre}" />
+
+
+                        <p:commandLink update=":form:pubDetail" oncomplete="PF('pubDialog').show()" title="View Detail">
+                            <h:outputText value="Abrir," styleClass="pi pi-search" style="margin:0 auto;"/>
+                            <f:setPropertyActionListener value="#{pub}" target="#{publicacionBlogController.selectedPub}" />
+                        </p:commandLink>
+                    </h:panelGrid>
+                </p:panel>
+            </p:dataGrid>
+
+            <p:dialog header="Detalles de Publicacion" widgetVar="pubDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="pubDetail" style="text-align:center;">
+                    <p:panelGrid  columns="2" rendered="#{not empty publicacionBlogController.selectedPub}" columnClasses="label,value">
+                        <h:outputText value="Titulo:" />
+                        <h:outputText value="#{publicacionBlogController.selectedPub}" />
+
+                        <h:outputText value="Autor:" />
+                        <h:outputText value="#{publicacionBlogController.selectedPub.creation}" />
+
+                        <h:outputText value="Contenido:" />
+                        <h:outputText value="#{publicacionBlogController.selectedPub.content}"/>
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>
+

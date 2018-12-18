@@ -46,7 +46,10 @@ public class UsuarioDao implements IDao<Usuario> {
         Connection connectionDB = conectorJDBC.conectar();
         PreparedStatement ps = null;
         try {
-            ps = connectionDB.prepareStatement("INSERT INTO Persona (nombre, apellido, segundoApellido, contrasena, correo, fechaNacimiento, sexo, telefono, calificacion,estado,id)  values (?,?,?,?,?,?,?,?,?,?,?)");
+            ps = connectionDB.prepareStatement("INSERT INTO Persona "
+                    + "(nombre,apellido,segundoApellido,contrasena,correo,"
+                    + "fechaNacimiento,sexo,telefono,calificacion,estado)"
+                    + "values (?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getApellido());
             ps.setString(3, usuario.getSegundoApellido());

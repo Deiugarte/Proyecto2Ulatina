@@ -6,58 +6,93 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Inicio</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
         <link rel="icon" href="./resources/favicon-16x16.ico"></link>
     </h:head>
     <h:body>
-        <h:form style="background-color:darkgreen" id="landingForm">
+        <h:form  style="display: flex;" id="landingForm">
+            <div style="display: flex; background-color: #353535; justify-content: center; width: 100%; left: 0"> 
+                <p:menubar style="font-weight: bolder; font-size: 17px;border-style: none;">
+                    <p:menuitem style="font-weight: bolder;"
 
-            <p:layout style="min-width:800px;min-height:735px;background-color: antiquewhite">
-                <p:layoutUnit  position="west" resizable="true" size="300" minSize="40" maxSize="400">
-                    Menú<br/> 
-                    <br/> 
-                    <p:button outcome="Landing" value="  Inicio " icon="ui-icon-star" disabled="true" iconPos="right">
-                        <f:param name="InicioLanding" value="50" />
-                    </p:button><br/> 
-                    <p:button outcome="Login" value="  Login  " icon="ui-icon-search" iconPos="right">
-                        <f:param name="LoginLanding" value="50" />
-                    </p:button><br/> 
-
-                    <p:button outcome="signUp" value="Sign Up" icon="ui-icon-person" iconPos="right">
-                        <f:param name="SignUp Landing" value="30" />
-                    </p:button><br/> 
-
-                    <p:button outcome="upload" value="Documentos" icon="ui-icon-script" iconPos="right">
-                        <f:param name="Documentos" value="30" />
-                    </p:button><br/> 
-
-                    <p:button outcome="Landing" value="Options" icon="ui-icon-wrench" iconPos="right">
-                        <f:param name="OptionsLanding" value="30" />
-                    </p:button><br/> 
-                    <br/> 
-                    <p:graphicImage value="resources/Icono.jpg" />
-                </p:layoutUnit>
-
-                <p:layoutUnit  position="east" resizable="true" size="300" minSize="40" maxSize="400">
-                    <div class="about">
-                        About <br/>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                        It has survived not only five centuries, but also the leap into electronic typesetting, 
-                        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets 
-                        containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker 
-                        including versions of Lorem Ipsum
-                    </div>
-
-                    <p:graphicImage value="resources/Icono.jpg" />
-                </p:layoutUnit>
-                <p:layoutUnit position="center">
-                    <p:galleria value="#{landing.images}" var="image" panelWidth="895" panelHeight="665" showCaption="false" style="width: 350px; margin: 0 auto;">
-                        <p:graphicImage library="images" name="#{image}" alt="Image Description for #{image}" title="#{image}"/>
-                    </p:galleria>
-                </p:layoutUnit>
-            </p:layout>
+                                value="Wiki" url="/faces/Bienvenida.xhtml"/>
+                    <p:menuitem style="font-weight: bolder;"
+                                value="Blogs" url="/faces/Bienvenida.xhtml"/>
+                    <p:menuitem style="font-weight: bolder;"
+                                value="Posts" url="/faces/Bienvenida.xhtml"/>
+                    <p:menuitem  style="font-weight: bolder;"
+                                 value="Iniciar Sesión" url="/faces/Login.xhtml"/>
+                    <p:menuitem  style="font-weight: bolder;
+                                 background-color: green;
+                                 border-radius: 25px;
+                                 width: 108px;
+                                 height: 5px;
+                                 padding: 14px;
+                                 padding-top: 7px;"
+                                 value="Registrarse" url="/faces/signUp.xhtml"/>
+                </p:menubar>
+            </div>
         </h:form>
+        <h:form>
+            <br/>
+            <div style="display:flex; justify-content: space-evenly; padding-left: 15%; padding-right: 15%; padding-top: 2%">
+                <div style=" align-self: center; "> 
+                    <div style="font-size: 2.8em">Respuestas a tus Preguntas en nuestra Wiki </div>
+                    <p>hey this is a text</p>
+                </div>
+                <p:graphicImage  style=" width: 50%;
+                                 height: 50%;"
+                                 library="images" name="books.jpg" title="La Mejor Wiki de la U" url="/faces/Login.xhtml"/>
+            </div>
+
+            <div style="display:flex; justify-content: space-evenly; padding-left: 15%; padding-right: 15%; padding-top: 2%">
+                <p:graphicImage  style=" width: 50%;
+                                 height: 50%;"
+                                 library="images" name="blog.jpg" title="Los mas autenticos blogs" url="/faces/Login.xhtml"/>
+                <div style=" align-self: center;  margin-left: 4%;"> 
+                    <div style="font-size: 2.8em"> Publica tus experiencias y conocimientos en tu blog </div>
+                    <p>hey this is a text</p>
+                </div>
+            </div>
+
+            <div style="display:flex; justify-content: space-evenly; padding-left: 15%; padding-right: 15%; padding-top: 2%; margin-bottom: 5%">
+                <div style=" align-self: center;"> 
+                    <div style="font-size: 2.8em">Encuentra las mejores publicaciones sobre temas de tu interes </div>
+                    <p>hey this is a text</p>
+                </div>
+                <p:graphicImage  style=" width: 50%;
+                                 height: 50%;"
+                                 library="images" name="publications.jpg" title="Las publicaciones con mas informacion" url="/faces/Login.xhtml"/>
+            </div>
+        </h:form>
+        <h:form  style="display: flex;" >
+            <div style="display: flex; background-color: #353535; justify-content: center; width: 100%; position: fixed; bottom: 0; left: 0"> 
+                <p:menubar style="font-weight: bolder; font-size: 17px;border-style: none;">
+                    <p:menuitem icon="fa fa-facebook-official"
+                                url="https://www.facebook.com/UniversidadLatinadeCostaRica/"/>
+                    <p:menuitem icon="fa fa-twitter-square" 
+                                url="https://twitter.com/ULatinadeCR"/>
+                    <p:menuitem icon="fa fa-whatsapp"
+                                url="https://api.whatsapp.com/send?phone=50672856568"/>
+                    <p:menuitem icon="fa fa-pinterest-p"
+                                url="https://ulatina.ac.cr/#"/>
+                    <p:menuitem icon="fa fa-linkedin-square"
+                                url="https://www.linkedin.com/company/universidad-latina-de-cr/"/>
+                    <p:menuitem  style="font-weight: bolder;"
+                                 value="Iniciar Sesión" url="/faces/Login.xhtml"/>
+                    <p:menuitem  style="font-weight: bolder;
+                                 background-color: green;
+                                 border-radius: 25px;
+                                 width: 108px;
+                                 height: 5px;
+                                 padding: 14px;
+                                 padding-top: 7px;"
+                                 value="Registrarse" url="/faces/signUp.xhtml"/>
+                </p:menubar>
+            </div>
+
+        </h:form>
+
     </h:body>
 </html>
 
