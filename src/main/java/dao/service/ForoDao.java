@@ -28,10 +28,10 @@ public class ForoDao implements IDao<Foro> {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = conn.prepareStatement("select forr.titulo, forr.pregunta, forr.fecha, per.nombre from Foro forr, Persona per where forr.autor = per.id;");
+            ps = conn.prepareStatement("select forr.idForoPregunta, forr.titulo, forr.pregunta, forr.fecha, per.nombre from Foro forr join Persona per on forr.autor = per.id");
             rs = ps.executeQuery();
             while (rs.next()) {
-                foros.add(new Foro(rs.getString("titulo"), rs.getString("pregunta"), rs.getString("nombre"), rs.getDate("fecha")));
+                foros.add(new Foro(rs.getInt("idForoPregunta"), rs.getString("titulo"), rs.getString("pregunta"), rs.getString("nombre"), rs.getDate("fecha")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -41,27 +41,7 @@ public class ForoDao implements IDao<Foro> {
         }
         return foros;
     }
-    public Foro dat(String titulo) {
-        Connection conn = conectorJDBC.conectar();
-       Foro foros = new Foro();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            ps = conn.prepareStatement("select forr.titulo, forr.pregunta, forr.fecha, per.nombre from Foro forr where titulo ="+titulo+", Persona per where forr.autor = per.id;");
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                foros.setTitulo(rs.getString("titulo"));
-                foros.setPregunta(rs.getString("pregunta"));
-                        //(new Foro(rs.getString("titulo"), rs.getString("pregunta"), rs.getString("nombre"), rs.getDate("fecha")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            LOG.error("No se pudo realizar... ", e);
-        } finally {
-            conectorJDBC.cerrarConexion(conn, ps, rs);
-        }
-        return null;
-    }
+
 
     public void insertForo(Foro data) {
         int insertId = 0;

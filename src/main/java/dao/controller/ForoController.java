@@ -22,20 +22,19 @@ import org.primefaces.event.SelectEvent;
  * @author Kenneth MC
  */
 @ManagedBean(name = "foroController")
-@ViewScoped
+
 public class ForoController implements Serializable {
 
     private int idForo, idAutor, idRespuesta;
     private String titulo, pregunta, nombreAutor, respuesta;
     private Date fecha;
     private List<Foro> foros = new ArrayList<>();
-
-    private static String tituloView;
-    private static String preguntaView;
+    private Foro sltForo;
+    private String pTitulo, pPregunta;
+    private int pId = 3;
 
     public ForoController() {
         init();
-
     }
 
     public void init() {
@@ -43,16 +42,6 @@ public class ForoController implements Serializable {
         this.buscarForo();
 
     }
-
-    public void select(Foro foro) {
-       
-        ForoDao dao = new ForoDao();
-        dao.dat(foro.getTitulo());
-        this.setTitulo(foro.getTitulo());
-        this.setPregunta(foro.getPregunta());
-
-    }
-
     public String crearForo(int id) {
         ForoDao forDao = new ForoDao();
         Foro foro = new Foro(this.idForo, this.titulo, this.pregunta, id, this.fecha);
@@ -66,12 +55,17 @@ public class ForoController implements Serializable {
         return null;
     }
 
-    public String Respuesta(int id) {
+    public String Respuesta(int id, int pregID) {
+        System.out.println("OREGUBTA ID" + pregID);
         RespuestaDao resDao = new RespuestaDao();
         Respuesta resp = new Respuesta(this.idRespuesta, this.respuesta, id, this.fecha);
-        System.out.println(id);
         try {
-            int idRespuesta = resDao.insert(resp);
+            int idres = resDao.insert(resp);
+            resDao = new RespuestaDao();
+            System.out.println("inserting this into the db" + idres);
+            System.out.println("inserting this pregunta into the db" + pregID);
+
+            resDao.insertRP(idres, pregID);
             return "Foro";
 
         } catch (Exception e) {
@@ -91,32 +85,24 @@ public class ForoController implements Serializable {
         return foros;
     }
 
-    public void onRowSelect(SelectEvent event) throws IOException, ClassNotFoundException, SQLException {
-        String t = "ForoRespuesta.xhtml";
-        ForoController foro = new ForoController();
-        Foro selectedColeccion = ((Foro) event.getObject());
-        foro.setTituloView(selectedColeccion.getTitulo());
-        this.setTituloView(foro.getTituloView());
-        foro.setPreguntaView(selectedColeccion.getPregunta());
-        this.setPreguntaView(foro.getPreguntaView());
-        this.select(selectedColeccion);
-        foro.redirect(t);
+    public String onRowSelect(String titulo, int idpreg, String pregunta) {
+        this.pTitulo = titulo;
+        this.pPregunta = pregunta;
+        this.pId = idpreg;
+        System.out.println(titulo + idpreg + pregunta);
+        return "ForoRespuesta";
         
     }
-        public void redirect(String url) {
-        try {
-            HttpServletRequest request = (HttpServletRequest) FacesContext
-                    .getCurrentInstance().getExternalContext().getRequest();
-            FacesContext
-                    .getCurrentInstance()
-                    .getExternalContext()
-                    .redirect(
-                            request.getContextPath()
-                            + "/faces/" + url);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+    public Foro getSltForo() {
+        return sltForo;
     }
+
+    public void setSltForo(Foro sltForo) {
+        this.sltForo = sltForo;
+    }
+
+
 
     public int getIdForo() {
         return idForo;
@@ -190,21 +176,31 @@ public class ForoController implements Serializable {
         this.foros = foros;
     }
 
-    public static String getTituloView() {
-        return tituloView;
+    public String getpTitulo() {
+        return pTitulo;
     }
 
-    public static void setTituloView(String tituloView) {
-        ForoController.tituloView = tituloView;
+    public void setpTitulo(String pTitulo) {
+        this.pTitulo = pTitulo;
     }
 
-    public static String getPreguntaView() {
-        return preguntaView;
+    public String getpPregunta() {
+        return pPregunta;
     }
 
-    public static void setPreguntaView(String preguntaView) {
-        ForoController.preguntaView = preguntaView;
+    public void setpPregunta(String pPregunta) {
+        this.pPregunta = pPregunta;
     }
+
+    public int getpId() {
+        return pId;
+    }
+
+    public void setpId(int pId) {
+        this.pId = pId;
+    }
+
+
 
 
 

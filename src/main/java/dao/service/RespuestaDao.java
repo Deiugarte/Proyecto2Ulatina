@@ -72,26 +72,20 @@ public class RespuestaDao implements IDao<Respuesta> {
         return insertId;
     }
 
-    public int insertL(int idRespuesta, int idForoPregunta) {
+    public void insertRP(int idRespuesta, int idForoPregunta) {
         Connection conn = conectorJDBC.conectar();
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = conn.prepareStatement("insert into Foro_Respuesta (idRespuesta,idForoPregunta) values (?,?);", Statement.RETURN_GENERATED_KEYS);
+            ps = conn.prepareStatement("insert into Foro_Respuesta (respuesta_idRespuesta,foro_idPregunta) values (?,?);");
             ps.setInt(1, idRespuesta);
             ps.setInt(2, idForoPregunta);
             ps.executeUpdate();
-            rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                insertId = rs.getInt(1);
-                System.out.println(insertId);
-            }
         } catch (SQLException e) {
             LOG.error("No se pudo insertar la Respuesta... ", e);
         } finally {
             conectorJDBC.cerrarConexion(conn, ps, rs);
         }
-        return insertId;
     }
 
     public int getInsertId() {

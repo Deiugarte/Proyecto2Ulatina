@@ -9,14 +9,10 @@
     </h:head>
     <h:body>
         <h:form>
-
-            <br/><br/>
             <p:dataTable id="Forito" value="#{foroController.foros}" var="forex"
                          selectionMode="single" 
-                         selection="#{forex.titulo}" 
+                         selection="#{foroController.sltForo}" 
                          rowKey="#{forex.titulo}">
-
-                <p:ajax event="rowSelect" listener="#{foroController.onRowSelect}"/>
                 <p:column headerText="Pregunta">
                     <h:outputText value="#{forex.titulo}"/>
                 </p:column>
@@ -29,7 +25,19 @@
                 <p:column headerText="Fecha P.">
                     <h:outputText value="#{forex.fecha}"/>
                 </p:column>
+                <p:column headerText="ID">
+                    <h:outputText value="#{forex.idForo}"/>
+                </p:column>
+                <p:column headerText="ver">
+                    <p:commandLink update="Forito" action="#{foroController.onRowSelect(forex.titulo,forex.idForo, forex.pregunta)}">
+                        <h:outputText id="plz" value="ver"></h:outputText>
+                        <f:setPropertyActionListener value="#{Forito}" target="#{foroController.sltForo}"></f:setPropertyActionListener>
+                    </p:commandLink>
+                </p:column>
             </p:dataTable>
+            <p:button outcome="ForoPregunta" value=" Hacer una pregunta " icon="ui-icon-star" disabled="false" iconPos="right">
+                <f:param name="foroP" value="50" />
+            </p:button><br/> 
         </h:form>
     </h:body>
 </html>

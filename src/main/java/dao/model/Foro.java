@@ -31,6 +31,13 @@ public class Foro {
         this.nombreAutor = nombreAutor;
         this.fecha = fecha;
     }
+        public Foro(int idForo, String titulo, String pregunta, String nombreAutor,Date fecha) {
+        this.titulo = titulo;
+         this.idForo = idForo;
+        this.pregunta = pregunta;
+        this.nombreAutor = nombreAutor;
+        this.fecha = fecha;
+    }
         public Foro(int idForo, String titulo, String pregunta, int idAutor, Date fecha) {
         this.idForo = idForo;
         this.titulo = titulo;
@@ -106,7 +113,9 @@ public class Foro {
 
     @Override
     public String toString() {
-        return "Foro{" + "titulo=" + titulo + ", pregunta=" + pregunta + ", nombreAutor=" + nombreAutor + ", fecha=" + fecha + '}';
+        return "Foro{" + "idForo=" + idForo + ", titulo=" + titulo + ", pregunta=" + pregunta + '}';
     }
+
+  
 
 }
