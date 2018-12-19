@@ -1,6 +1,6 @@
 package dao.model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -10,12 +10,12 @@ public class Foro {
 
     private int idForo, idAutor, idRespuesta;
     private String titulo, pregunta, nombreAutor, respuesta;
-    private Date fecha;
+    private Timestamp fecha;
     public Foro() {
 
     }
 
-    public Foro(int idForo, String titulo, String pregunta, int idAutor, Date fecha, int idRespuesta, String respuesta) {
+    public Foro(int idForo, String titulo, String pregunta, int idAutor, Timestamp fecha, int idRespuesta, String respuesta) {
         this.idForo = idForo;
         this.titulo = titulo;
         this.pregunta = pregunta;
@@ -25,20 +25,20 @@ public class Foro {
         this.fecha = fecha;
     }   
 
-    public Foro(String titulo, String pregunta, String nombreAutor,Date fecha) {
+    public Foro(String titulo, String pregunta, String nombreAutor,Timestamp fecha) {
         this.titulo = titulo;
         this.pregunta = pregunta;
         this.nombreAutor = nombreAutor;
         this.fecha = fecha;
     }
-        public Foro(int idForo, String titulo, String pregunta, String nombreAutor,Date fecha) {
+        public Foro(int idForo, String titulo, String pregunta, String nombreAutor,Timestamp fecha) {
         this.titulo = titulo;
          this.idForo = idForo;
         this.pregunta = pregunta;
         this.nombreAutor = nombreAutor;
         this.fecha = fecha;
     }
-        public Foro(int idForo, String titulo, String pregunta, int idAutor, Date fecha) {
+        public Foro(int idForo, String titulo, String pregunta, int idAutor, Timestamp fecha) {
         this.idForo = idForo;
         this.titulo = titulo;
         this.pregunta = pregunta;
@@ -58,11 +58,11 @@ public class Foro {
         return idAutor;
     }
 
-    public Date getFecha() {
+    public Timestamp getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(Timestamp fecha) {
         this.fecha = fecha;
     }
 

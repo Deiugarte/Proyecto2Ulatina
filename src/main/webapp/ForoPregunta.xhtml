@@ -13,18 +13,17 @@
             <p:panel id="crearForPnl" header="Foro"
                      style="width: 1000px;margin: 0 auto; text-align: center; font-weight: bolder; font-size: 100%;">
                 <h:panelGrid id="creForPanel" columns="2" cellpadding="5">
-                    <h:outputText value="Titulo"/>
+                    <h:outputText value="Inserte un breve titulo de su duda o consulta:"/>
                     <p:inputText id="Titulof" value="#{foroController.titulo}"></p:inputText>
                     <p:spacer/><p:spacer/>
-                    <h:outputText value="Realizar pregunta" style="margin-left: 0px "/>
+                    <h:outputText value="Describa en detalle su duda o consulta:" style="margin-left: 0px "/>
                     <p:inputTextarea rows="5" cols="30" autoResize="false" value="#{foroController.pregunta}" />
                     <p:spacer/><p:spacer/>
-                    <h:outputText value="Autor"/>
+                    <h:outputText value="ID del Autor"/>
                     <h:outputText id="Autorf" value="#{loginController.usuario.id}" ></h:outputText>
                     <p:spacer/><p:spacer/>
-                    <h:outputText value="Fecha" />
-                    <p:calendar id="FechaPreg" value="#{foroController.fecha}" showOn="button" />
-                    <p:spacer/><p:spacer/>
+                    <h:outputText value="Fecha" style="visibility: hidden"/>
+                    <h:outputText id="Fe" value="#{foroController.fecha}" ></h:outputText>
                     <p:commandButton id="ForoButton" action="#{foroController.crearForo(loginController.usuario.id)}" value="Subir" ></p:commandButton>
                     <p:button outcome="Foro" value=" Volver" icon="ui-icon-star" disabled="false" iconPos="right"></p:button>
                 </h:panelGrid>

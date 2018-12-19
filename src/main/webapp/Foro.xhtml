@@ -14,7 +14,7 @@
                              selectionMode="single" 
                              selection="#{foroController.sltForo}" 
                              rowKey="#{forex.titulo}">
-                    <p:column headerText="Pregunta">
+                    <p:column headerText="Titulo de la Pregunta">
                         <h:outputText value="#{forex.titulo}"/>
                     </p:column>
                     <p:column headerText="Descripción">
@@ -23,7 +23,7 @@
                     <p:column headerText="Autor de la pregunta">
                         <h:outputText value="#{forex.nombreAutor}"/>
                     </p:column>
-                    <p:column headerText="Fecha P.">
+                    <p:column headerText="Fecha de publicación">
                         <h:outputText value="#{forex.fecha}"/>
                     </p:column>
                     <p:column headerText="ID">

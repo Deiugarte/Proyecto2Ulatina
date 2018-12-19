@@ -1,6 +1,6 @@
 package dao.model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -10,36 +10,38 @@ public class Respuesta {
 
     private int idRespuesta;
     private String desrespuesta;
-    private Date fecha;
+    private Timestamp fecha;
     private String autor;
     private int idAutor;
+
     public Respuesta() {
 
     }
 
-    public Respuesta(int idRespuesta, String desrespuesta,int idAutor, Date fecha) {
+    public Respuesta(int idRespuesta, String desrespuesta, int idAutor, Timestamp fecha) {
         this.idRespuesta = idRespuesta;
         this.desrespuesta = desrespuesta;
-        this.fecha=fecha;
-        this.idAutor=idAutor;
-        
+        this.fecha = fecha;
+        this.idAutor = idAutor;
+
     }
-    public Respuesta(String desrespuesta, String autor, Date fecha) {
+
+    public Respuesta(String desrespuesta, String autor, Timestamp fecha) {
         this.desrespuesta = desrespuesta;
-        this.fecha=fecha;
-        this.autor=autor;
-        
+        this.fecha = fecha;
+        this.autor = autor;
+
     }
 
     public int getIdRespuesta() {
         return idRespuesta;
     }
 
-    public Date getFecha() {
+    public Timestamp getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(Timestamp fecha) {
         this.fecha = fecha;
     }
 
@@ -59,8 +61,6 @@ public class Respuesta {
         this.idAutor = idAutor;
     }
 
-
-
     public void setIdRespuesta(int idRespuesta) {
         this.idRespuesta = idRespuesta;
     }
@@ -71,6 +71,11 @@ public class Respuesta {
 
     public void setDesrespuesta(String desrespuesta) {
         this.desrespuesta = desrespuesta;
+    }
+
+    @Override
+    public String toString() {
+        return "Respuesta{" + "idRespuesta=" + idRespuesta + ", desrespuesta=" + desrespuesta + ", fecha=" + fecha + ", autor=" + autor + ", idAutor=" + idAutor + '}';
     }
 
 }

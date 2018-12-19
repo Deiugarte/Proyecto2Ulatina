@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
@@ -30,7 +31,7 @@ public class ForoDao implements IDao<Foro> {
             ps = conn.prepareStatement("select forr.idForoPregunta, forr.titulo, forr.pregunta, forr.fecha, per.nombre from Foro forr join Persona per on forr.autor = per.id");
             rs = ps.executeQuery();
             while (rs.next()) {
-                foros.add(new Foro(rs.getInt("idForoPregunta"), rs.getString("titulo"), rs.getString("pregunta"), rs.getString("nombre"), rs.getDate("fecha")));
+                foros.add(new Foro(rs.getInt("idForoPregunta"), rs.getString("titulo"), rs.getString("pregunta"), rs.getString("nombre"), rs.getTimestamp("fecha")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -78,7 +79,7 @@ public class ForoDao implements IDao<Foro> {
             ps.setString(1, pregunta);
             rs = ps.executeQuery();
             while (rs.next()) {
-                foros.add(new Foro(rs.getString("titulo"), rs.getString("pregunta"), rs.getString("nombre"), rs.getDate("fecha")));
+                foros.add(new Foro(rs.getString("titulo"), rs.getString("pregunta"), rs.getString("nombre"), rs.getTimestamp("fecha")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

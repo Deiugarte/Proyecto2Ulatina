@@ -39,7 +39,7 @@ public class ForoController implements Serializable {
 
     public String crearForo(int id) {
         ForoDao forDao = new ForoDao();
-        Foro foro = new Foro(this.idForo, this.titulo, this.pregunta, id, this.fecha);
+        Foro foro = new Foro(this.idForo, this.titulo, this.pregunta, id, java.sql.Timestamp.valueOf(java.time.LocalDateTime.now()));
 
         try {
             forDao.insertForo(foro);
