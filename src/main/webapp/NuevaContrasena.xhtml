@@ -10,9 +10,9 @@
     <h:body>
         <h:form id="desbloqueoForm">
             <p:growl id="msg_debloqueo" showDetail="true" life="3000"/>
-            <p:panel id="debloqueoPnl" header="Nueva Contrasena"
-                     style="width: 300px; margin: 0 auto; height: 320px"> 
-                <h:panelGrid id="debloqueoPanel" columns="1" cellpadding="5">
+            <p:panel id="debloqueoPnl" header="Nueva Contraseña"
+                     style="width: 300px; margin: 0 auto; height: 250px; text-align: center; font-weight: bolder;"> 
+                <h:panelGrid id="debloqueoPanel" columns="2" cellpadding="5">
                     <h:outputText value="Codigo de Verificacion:"/>
                     <p:inputText id="veriCode" style="display:block;width:80px;margin: auto" value="#{loginController.code}"/>	
                     <h:outputText value="Digite su nueva contrasena:" />

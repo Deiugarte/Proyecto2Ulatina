@@ -1,7 +1,6 @@
 package dao.service;
 
 import dao.model.Foro;
-import java.awt.PageAttributes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

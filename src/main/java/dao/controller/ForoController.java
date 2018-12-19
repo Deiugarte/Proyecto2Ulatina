@@ -4,26 +4,20 @@ import dao.model.Foro;
 import dao.model.Respuesta;
 import dao.service.ForoDao;
 import dao.service.RespuestaDao;
-import java.io.IOException;
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
-import org.primefaces.event.SelectEvent;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author Kenneth MC
  */
 @ManagedBean(name = "foroController")
-
+@SessionScoped
 public class ForoController implements Serializable {
 
     private int idForo, idAutor, idRespuesta;
@@ -35,14 +29,14 @@ public class ForoController implements Serializable {
     private int pId;
 
     public ForoController() {
-       
+
     }
+
     @PostConstruct
     public void cargar() {
-
-        this.buscarForo();
-
+        buscarForo();
     }
+
     public String crearForo(int id) {
         ForoDao forDao = new ForoDao();
         Foro foro = new Foro(this.idForo, this.titulo, this.pregunta, id, this.fecha);
@@ -50,25 +44,6 @@ public class ForoController implements Serializable {
         try {
             forDao.insertForo(foro);
             return "Foro";
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public String Respuesta(int id, int pregID) {
-        System.out.println("OREGUBTA ID" + pregID);
-        RespuestaDao resDao = new RespuestaDao();
-        Respuesta resp = new Respuesta(this.idRespuesta, this.respuesta, id, this.fecha);
-        try {
-            int idres = resDao.insert(resp);
-            resDao = new RespuestaDao();
-            System.out.println("inserting this into the db" + idres);
-            System.out.println("inserting this pregunta into the db" + pregID);
-
-            resDao.insertRP(idres, pregID);
-            return "Foro";
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -92,7 +67,6 @@ public class ForoController implements Serializable {
         this.pId = idpreg;
         System.out.println(titulo + idpreg + pregunta);
         return "ForoRespuesta";
-        
     }
 
     public Foro getSltForo() {
@@ -102,8 +76,6 @@ public class ForoController implements Serializable {
     public void setSltForo(Foro sltForo) {
         this.sltForo = sltForo;
     }
-
-
 
     public int getIdForo() {
         return idForo;
@@ -200,9 +172,5 @@ public class ForoController implements Serializable {
     public void setpId(int pId) {
         this.pId = pId;
     }
-
-
-
-
 
 }

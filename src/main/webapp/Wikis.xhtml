@@ -2,29 +2,70 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Buscar Wiki</title>
     </h:head>
-    <h:body>
+    <h:body style="background: #333333">
+        <style type="text/css">
+            .ui-datatable .ui-datatable-header {
+                text-align: right !important;
+            }
+
+            .ui-button-text-only .ui-button-text {
+                padding: 0.3em 0.4em;
+            }
+
+            .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-chkbox {
+                visibility: hidden;
+            }
+
+            .ui-filter-column .ui-column-customfilter .custom-filter {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .year-spinner input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        </style>
         <h:form>
-            <p:inputText value="#{wikiController.value}"></p:inputText>
-            <p:commandButton action="#{wikiController.buscarWiki()}" value="Buscar" update="wikis"></p:commandButton>
-            <br/><br/>
-            <p:dataTable id="wikis" value="#{wikiController.wikis}" var="wik">
-                <p:column headerText="Titulo">
-                    <h:outputText value="#{wik.titulo}"/>
-                </p:column>
-                <p:column headerText="Tema">
-                    <h:outputText value="#{wik.tema}"/>
-                </p:column>
-                <p:column headerText="Autor">
-                    <h:outputText value="#{wik.nombreAutor}"/>
-                </p:column>
-                <p:column headerText="Contenido">
-                    <h:outputText value="#{wik.contenido}"/>
-                </p:column>
-            </p:dataTable>
+            <p:panel header="Wikis" style="font-weight: bolder; font-size: 90%; margin: 0 auto; text-align: center;">
+                <p:spacer/><p:spacer/><p:spacer/>
+                <p:dataTable var="wik" value="#{wikiController.wikisCargar}" widgetVar="wikisTable"
+                             emptyMessage="No se encontro nada relacionado" filteredValue="#{wikiController.wikis}">
+
+                    <f:facet name="header">
+                        <p:outputPanel>
+                            <h:outputText value="Buscar Todos los campos: "/>
+                            <p:inputText id="SrchAll" onkeyup="PF('wikisTable').filter()" style="width: 150px" placeholder="Digite la plabra clave"/>
+                        </p:outputPanel>
+                    </f:facet>
+
+                    <p:column filterBy="#{wik.titulo}" headerText="Titulo" footerText="Titulo" filterMatchMode="contains">
+                        <h:outputText value="#{wik.titulo}"/>
+                    </p:column>
+
+                    <p:column filterBy="#{wik.tema}" headerText="Tema" footerText="Tema" filterMatchMode="contains">
+                        <h:outputText value="#{wik.tema}"/>
+                    </p:column>
+
+                    <p:column filterBy="#{wik.nombreAutor}" headerText="Autor" footerText="Autor" filterMatchMode="contains">
+                        <h:outputText value="#{wik.nombreAutor}"/>
+                    </p:column>
+
+                    <p:column filterBy="#{wik.contenido}" headerText="Contenido" footerText="Contenido" filterMatchMode="contains">
+                        <h:outputText value="#{wik.contenido}"/>
+                    </p:column>
+                </p:dataTable>
+                <p:spacer/><p:spacer/><p:spacer/><p:spacer/><p:spacer/><p:spacer/><p:spacer/><p:spacer/>
+                <br/>
+                <p:button style="width:90px;height:30px; margin: 0 auto; align-content: center; font-weight: bolder; font-size: 100%;" 
+                          outcome="Bienvenida" value="  Volver " icon="ui-icon-star" iconPos="right">
+                </p:button>
+            </p:panel>
         </h:form>
     </h:body>
 </html>

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao.service;
 
 import dao.model.Respuesta;
@@ -24,7 +19,7 @@ public class RespuestaDao implements IDao<Respuesta> {
 
     private final Conector conectorJDBC = Conector.getConector();
     private static final Logger LOG = LogManager.getLogger(UsuarioDao.class.getName());
-    private int insertId = 0;
+    private int insertId;
 
     @Override
     public List<Respuesta> buscar() {

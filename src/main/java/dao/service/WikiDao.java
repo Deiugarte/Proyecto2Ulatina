@@ -39,7 +39,7 @@ public class WikiDao implements IDao<Wiki> {
                     + "    wik.idWiki = temWik.id_wiki\n"
                     + "        AND tem.idTemas = temWik.id_temas\n"
                     + "        AND per.id = wik.Autor;");
-            ps.executeQuery();
+            rs = ps.executeQuery();
             while (rs.next()) {
                 wikis.add(new Wiki(rs.getString("Titulo"), rs.getString("Contenido"), rs.getString("nombre"), rs.getString("Tema")));
             }

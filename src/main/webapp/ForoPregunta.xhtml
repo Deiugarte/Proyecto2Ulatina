@@ -7,28 +7,26 @@
     <h:head>
         <title>Foros</title>
     </h:head>
-    <h:body>
+    <h:body style="background: #333333">
         <h:form id="crearForoForm">
+            <br/><br/><br/><br/>
             <p:panel id="crearForPnl" header="Foro"
-                     style="width: 1000px;margin: 0 auto;">
-                <h:panelGrid id="creForPanel" columns="1" cellpadding="5">
+                     style="width: 1000px;margin: 0 auto; text-align: center; font-weight: bolder; font-size: 100%;">
+                <h:panelGrid id="creForPanel" columns="2" cellpadding="5">
                     <h:outputText value="Titulo"/>
                     <p:inputText id="Titulof" value="#{foroController.titulo}"></p:inputText>
-                    <p:spacer/>
-                    <p:spacer/>
+                    <p:spacer/><p:spacer/>
                     <h:outputText value="Realizar pregunta" style="margin-left: 0px "/>
                     <p:inputTextarea rows="5" cols="30" autoResize="false" value="#{foroController.pregunta}" />
-                    <br/>
-                    <p:spacer/>
+                    <p:spacer/><p:spacer/>
                     <h:outputText value="Autor"/>
                     <h:outputText id="Autorf" value="#{loginController.usuario.id}" ></h:outputText>
-                    <p:spacer/>
+                    <p:spacer/><p:spacer/>
                     <h:outputText value="Fecha" />
                     <p:calendar id="FechaPreg" value="#{foroController.fecha}" showOn="button" />
-                    <p:spacer/>
-                    <h:panelGrid id="crearPregunta" columns="1" cellpadding="5" style="margin: 0 auto;">
-                        <p:commandButton id="ForoButton" action="#{foroController.crearForo(loginController.usuario.id)}" value="Subir" ></p:commandButton>
-                    </h:panelGrid>
+                    <p:spacer/><p:spacer/>
+                    <p:commandButton id="ForoButton" action="#{foroController.crearForo(loginController.usuario.id)}" value="Subir" ></p:commandButton>
+                    <p:button outcome="Foro" value=" Volver" icon="ui-icon-star" disabled="false" iconPos="right"></p:button>
                 </h:panelGrid>
             </p:panel>
         </h:form>

@@ -12,23 +12,17 @@
         <h:outputStylesheet library="css" name="bootstrap.min.css" />
 
         <title>JSF Bootstrap Example</title>
-
-        <style type="text/css">
-
-            .col-xs-updated {       
-
-                width: 92% !important;
-
-            }
-        </style>
     </h:head>
 
-    <h:body style="text-align:center">
+    <h:body style="text-align:center; background: #333333">
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         <h:form id="profile">
             <p:growl id="msg" showDetail="true" life="4000" />
             <p:panel id="loginPnl" header="Mi Perfil"
-                     style="width: 450px;margin: 0 auto; height: 300px">
-                <h:panelGrid style=" margin: 0 auto;" id="loginPanel" columns="2" cellpadding="5">
+                     style="width: 450px;margin: 0 auto; height: 300px; font-size:95%;">
+                <h:panelGrid style=" margin: 0 auto; font-weight: bolder; font-size: 120%;" id="loginPanel" columns="2" cellpadding="10">
+                    <p:spacer/>
+                    <p:spacer/>
                     <h:outputText value="Nombre: "/>
                     <h:outputText value="#{loginController.usuario.nombre}"/>
                     <h:outputText value="Apellido: "/>
@@ -41,13 +35,13 @@
                     <h:outputText value="#{loginController.usuario.fechaNacimiento}"/>
                     <h:outputText value="ID: "/>
                     <h:outputText value="#{loginController.usuario.id}"/>
+                    <p:spacer/>
+                    <p:spacer/>
+                    <p:spacer/>
+                    <p:spacer/>
                 </h:panelGrid>
-                <br/> 
-                <p:button   outcome="Foro" value="  Foro " icon="ui-icon-star" disabled="false" iconPos="right">
-                    <f:param name="foroM" value="50" />
-                </p:button><br/> 
-                <p:button outcome="ForoPregunta" value="  Foro Pregunta " icon="ui-icon-star" disabled="false" iconPos="right">
-                    <f:param name="foroP" value="50" />
+                <p:button style="width:100px;height:40px; margin: 0 auto; align-content: center; font-weight: bolder; font-size: 100%;" outcome="Bienvenida" value="  Volver " icon="ui-icon-star" iconPos="right">
+                    <f:param name="1" value="50" />
                 </p:button><br/> 
             </p:panel>
         </h:form>

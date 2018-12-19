@@ -6,8 +6,8 @@ import dao.service.TemaDao;
 import dao.service.WikiDao;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -22,10 +22,16 @@ public class WikiController implements Serializable {
     private int idWiki, idAutor, idTema;
     private String titulo, contenido, nombreAutor, tema;
     private List<Wiki> wikis = new ArrayList<>();
+    private List<Wiki> wikisCargar = new ArrayList<>();
     private String value;
 
     public WikiController() {
 
+    }
+
+    @PostConstruct
+    public void init() {
+        buscar();
     }
 
     public String crearWiki() {
@@ -35,7 +41,7 @@ public class WikiController implements Serializable {
         Tema tem = new Tema(this.idTema, this.tema);
         try {
             temDao.insert(tem);
-            wikDao.insert(wik,temDao.insert(tem));
+            wikDao.insert(wik, temDao.insert(tem));
             return "Login";
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,13 +49,13 @@ public class WikiController implements Serializable {
         return null;
     }
 
-    public List<Wiki> buscarWiki() {
-        WikiDao wikDao = new WikiDao();
-        wikis = wikDao.wikis(value);
-        for (Wiki wik : wikis) {
+    public List<Wiki> buscar() {
+        WikiDao wiki = new WikiDao();
+        wikisCargar = wiki.buscar();
+        for (Wiki wik : wikisCargar) {
             System.out.println(wik);
         }
-        return wikis;
+        return wikisCargar;
     }
 
     public int getIdWiki() {
@@ -110,6 +116,14 @@ public class WikiController implements Serializable {
 
     public List<Wiki> getWikis() {
         return wikis;
+    }
+
+    public void setWikis(List<Wiki> wikis) {
+        this.wikis = wikis;
+    }
+
+    public List<Wiki> getWikisCargar() {
+        return wikisCargar;
     }
 
     public String getValue() {

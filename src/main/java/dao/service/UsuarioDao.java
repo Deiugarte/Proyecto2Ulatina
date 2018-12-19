@@ -87,13 +87,13 @@ public class UsuarioDao implements IDao<Usuario> {
                         rs.getString("sexo"), rs.getString("telefono"),
                         rs.getDate("fechaNacimiento"), rs.getDouble("calificacion"), rs.getBoolean("estado"),rs.getInt("id"));
             }
-            System.out.println(userLogged.getNombre());
             return userLogged;
         } catch (SQLException ex) {
             LOG.error("No se pudo obtener el usuario", ex);
         } finally {
             conectorJDBC.cerrarConexion(conn, ps, rs);
         }
+        System.out.println(userLogged.getNombre());
         return userLogged;
     }
     
@@ -117,14 +117,14 @@ public class UsuarioDao implements IDao<Usuario> {
         return block;
     }
     
-    public void setEstado(boolean estado, String nombre) {
+    public void setEstado(boolean estado, String user) {
         Connection conn = conectorJDBC.conectar();
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
             ps = conn.prepareStatement("Update Persona set estado = ? where correo = ?");
             ps.setBoolean(1, estado);
-            ps.setString(2, nombre);
+            ps.setString(2, user);
             ps.execute();
         } catch (SQLException ex) {
             ex.getStackTrace();

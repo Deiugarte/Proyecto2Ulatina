@@ -8,39 +8,32 @@
         <title>Nueva Publicacion</title>
     </h:head>
     <h:body style="text-align:center"> 
-      <!--  <div id="message">
-            <p:ajaxStatus style="display:block;  margin-top:.5em;">
-                <f:facet name="default">
-                    <h:outputText value="Ingrese los Datos" />
-                </f:facet>
-                <f:facet name="start">
-                    <h:outputText value="Por favor espere, Conectando a la Base de Datos..." />
-                </f:facet>
-                <f:facet name="complete">
-                    <h:outputText value="Please try again, Error!" />
-                </f:facet>
-            </p:ajaxStatus>
-        </div>  -->
         <h:form id="newEntryForm">
+            <br/><br/><br/><br/><br/>
             <p:messages id="messages" showDetail="true" closable="true">
-
             </p:messages>
             <p:growl id="msg" showDetail="true" life="4000" />
-            <p:panel id="newEntryPanel" header="Login"
-                     style="width: 800px; margin: 0 auto; height: 600px">
-                <h:panelGrid id="newEntryPanelGrid" columns="2" cellpadding="5">
-                    <h:outputText value="Hola, #{loginController.usuario.nombre}! Crea tu nueva publicacion:" />
-        
-                    <h:outputText value="Titulo: #{loginController.id}" />
+            <p:panel id="newEntryPanel" header="Nueva Publicacion"
+                     style="width: 800px; margin: 0 auto; height: 400px">
+                <h:panelGrid id="newEntryPanelGrid" columns="2" cellpadding="5" style="font-weight: bolder; font-size: 100%;">
+                    <h:outputText value="Hola, #{loginController.usuario.nombre}! Crea tu nueva publicacion" />
+                    <p:spacer/><p:spacer/><p:spacer/>
+                    <h:outputText value="Tu ID: #{loginController.id}" />
+                    <p:spacer/><p:spacer/><p:spacer/>
+                    <h:outputText value="Titulo del Post"/>
                     <p:inputText id="title" value="#{publicacionBlogController.title}"></p:inputText>
                     <p:spacer /><p:spacer />	
                     <h:outputText value="Contenido" />
                     <p:inputTextarea style="width:400px" id="content" value="#{publicacionBlogController.content}"></p:inputTextarea>
                     <p:message for="content"></p:message>
                 </h:panelGrid>
-                <h:panelGrid columns="1" cellpadding="10" width="100%" style=" width: 100px; margin: 0 auto;">
-                    <p:commandButton id="newEntryBtn" action="#{publicacionBlogController.submitEntry(loginController.usuario.id)}" value="Crear Publicacion" update="newEntryForm" ajax="true" style="float: right;">
+                <h:panelGrid columns="2" cellpadding="10" width="100%" style=" width: 100px; margin: 0 auto;">
+                    <p:commandButton id="newEntryBtn" action="#{publicacionBlogController.submitEntry(loginController.usuario.id)}" value="Crear Publicacion" 
+                                     update="newEntryForm" ajax="true" style="float: right;">
                     </p:commandButton>
+                    <p:button style="width:90px;height:30px; margin: 0 auto; align-content: center; font-weight: bolder; font-size: 100%;" 
+                              outcome="Bienvenida" value="  Volver " icon="ui-icon-star" iconPos="right">
+                    </p:button>
                 </h:panelGrid>
 
             </p:panel>
@@ -53,7 +46,6 @@
         function manejarLogin(xhr, status, args) {
             alert('staLogeado ' + args.estaLogeado);
             alert('nombre ' + args.nombre);
-
             if (args.estaLogeado) {
                 //alert('Entro a la funcion en Javascript de prueba para hacer una pausa antes de ingresar');
                 setTimeout(function () {

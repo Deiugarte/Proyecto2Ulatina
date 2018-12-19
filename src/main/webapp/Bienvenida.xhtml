@@ -9,47 +9,45 @@
         <title>MenuPrincipal</title>
         <link rel="icon" href="./resources/favicon-16x16.ico"></link>
     </h:head>
-    <h:body>
+    <h:body style="background: #333333">
         <p:layout style="min-width:400px;min-height:500px;background-color: antiquewhite" styleClass="complex">
             <p:layoutUnit  position="west" resizable="true" size="200" minSize="40" maxSize="400">
-                <h3>Bienvenido al sistema #{loginController.user}</h3>
-
-                <p:button style="width:120px;height:120px" outcome="Bienvenida" value="  Mi Perfil " icon="ui-icon-star" iconPos="right">
+                <h3>Bienvenido al sistema</h3>
+                <h4> #{loginController.usuario.nombre} </h4>
+                <p:button style="width:120px;height:100px" outcome="Profile" value="  Mi Perfil " icon="ui-icon-star" iconPos="right">
                     <f:param name="1" value="50" />
                 </p:button><br/> 
-                <p:button style="width:120px;height:120px" outcome="Bienvenida" value="  Mis documentos  " icon="ui-icon-search" iconPos="right">
+                <p:button style="width:120px;height:100px" outcome="upload" value="  Mis documentos  " icon="ui-icon-search" iconPos="right">
                     <f:param name="2" value="50" />
                 </p:button><br/> 
-
-                <p:button style="width:120px;height:120px" outcome="Bienvenida" value=" Wiki " icon="ui-icon-person" iconPos="right">
+                <p:button style="width:120px;height:100px" outcome="Wikis" value=" Wiki " icon="ui-icon-person" iconPos="right">
                     <f:param name="3 Landing" value="30" />
                 </p:button><br/> 
-
-                <p:button style="width:120px;height:120px" outcome="blogMenu" value=" Blog " icon="ui-icon-wrench" iconPos="right">
+                <p:button style="width:120px;height:100px" outcome="blogMenu" value=" Blog " icon="ui-icon-person" iconPos="right">
                     <f:param name="4" value="30" />
                 </p:button><br/> 
-                <p:button style="width:120px;height:120px" outcome="Login" value="Salir" icon="ui-icon-wrench" iconPos="right">
+                <p:button style="width:120px;height:100px" outcome="Foro" value=" Foro " icon="ui-icon-person" iconPos="right">
                     <f:param name="5" value="30" />
                 </p:button><br/> 
+                <p:button style="width:120px;height:100px" outcome="Landing" value=" Salir " icon="ui-icon-wrench" iconPos="right">
+                    <f:param name="6" value="30" />
+                </p:button><br/> 
                 <br/> 
-
             </p:layoutUnit>
-            <p:layoutUnit position="center" resizable="true" size="300" minSize="20" maxSize="400">
+            <p:layoutUnit position="center" resizable="true" size="300" minSize="20" maxSize="400" style="font-weight: bolder; align-content: center; align-items: center; margin: 0 auto;">
                 Categorias
                 <p:contentFlow value="#{menuB.images}" var="image">
                     <p:graphicImage library="MB" name="#{image}" styleClass="content" />
                     <div class="caption">#{image}</div>
                 </p:contentFlow>
-                <h:form>
-
-                    <p:panel id="horizontal" header="Información" toggleable="true" toggleOrientation="horizontal">
+                <h:form style="font-weight: bolder; align-content: center; align-items: center; margin: 0 auto;">
+                    <p:panel id="horizontal" header="Información" toggleable="true" toggleOrientation="horizontal" style="font-size: 100%; font-weight: bolder;">
                         <h:panelGrid columns="2" cellpadding="10">
                             <p:graphicImage library="icono.jpg" />
                             <h:outputText
-                                value="The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                                Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect,
-                                but given to ruthless violence whenever anything stands against the good of the family." />
+                                value="Se busca implementar una herramienta colaborativa para estudiantes de la Universidad Latina de Costa Rica, en donde puedan recurrir para apoyarse entre si y reforzar sus conocimientos en distintos temas.
+                                Además, se busca asistir a los estudiantes de las sedes más lejanas; por el motivo de que se les dificulta el contacto frecuente y coordinación con sus respectivos profesores y compañeros.
+                                En otras palabras, nuestra herramienta busca ser un recurso para la comunidad universitaria de modo que puedan brindarse ayuda entre sí."  style=" text-align: center; font-weight: bolder; font-size: 100%;"/>
                         </h:panelGrid>
                     </p:panel>
                 </h:form>

@@ -7,37 +7,43 @@
     <h:head>
         <title>Foro</title>
     </h:head>
-    <h:body>
+    <h:body style="background: #333333">
         <h:form>
-            <p:dataTable id="Forito" value="#{foroController.foros}" var="forex"
-                         selectionMode="single" 
-                         selection="#{foroController.sltForo}" 
-                         rowKey="#{forex.titulo}">
-                <p:column headerText="Pregunta">
-                    <h:outputText value="#{forex.titulo}"/>
-                </p:column>
-                <p:column headerText="Descripción">
-                    <h:outputText value="#{forex.pregunta}"/>
-                </p:column>
-                <p:column headerText="Autor de la pregunta">
-                    <h:outputText value="#{forex.nombreAutor}"/>
-                </p:column>
-                <p:column headerText="Fecha P.">
-                    <h:outputText value="#{forex.fecha}"/>
-                </p:column>
-                <p:column headerText="ID">
-                    <h:outputText value="#{forex.idForo}"/>
-                </p:column>
-                <p:column headerText="ver">
-                    <p:commandLink update="Forito" action="#{foroController.onRowSelect(forex.titulo,forex.idForo, forex.pregunta)}">
-                        <h:outputText id="plz" value="ver"></h:outputText>
-                        <f:setPropertyActionListener value="#{Forito}" target="#{foroController.sltForo}"></f:setPropertyActionListener>
-                    </p:commandLink>
-                </p:column>
-            </p:dataTable>
-            <p:button outcome="ForoPregunta" value=" Hacer una pregunta " icon="ui-icon-star" disabled="false" iconPos="right">
-                <f:param name="foroP" value="50" />
-            </p:button><br/> 
+            <p:panel header="Foros" style="font-weight: bolder; font-size: 93%; margin: 0 auto; text-align: center;">
+                <p:dataTable id="Forito" value="#{foroController.foros}" var="forex"
+                             selectionMode="single" 
+                             selection="#{foroController.sltForo}" 
+                             rowKey="#{forex.titulo}">
+                    <p:column headerText="Pregunta">
+                        <h:outputText value="#{forex.titulo}"/>
+                    </p:column>
+                    <p:column headerText="Descripción">
+                        <h:outputText value="#{forex.pregunta}"/>
+                    </p:column>
+                    <p:column headerText="Autor de la pregunta">
+                        <h:outputText value="#{forex.nombreAutor}"/>
+                    </p:column>
+                    <p:column headerText="Fecha P.">
+                        <h:outputText value="#{forex.fecha}"/>
+                    </p:column>
+                    <p:column headerText="ID">
+                        <h:outputText value="#{forex.idForo}"/>
+                    </p:column>
+                    <p:column headerText="ver">
+                        <p:commandLink update="Forito" action="#{foroController.onRowSelect(forex.titulo,forex.idForo, forex.pregunta)}">
+                            <h:outputText id="plz" value="Ver"/>
+                            <f:setPropertyActionListener value="#{Forito}" target="#{foroController.sltForo}"></f:setPropertyActionListener>
+                        </p:commandLink>
+                    </p:column>
+                </p:dataTable>
+                <br/>
+                <p:button outcome="ForoPregunta" value=" Hacer una pregunta " icon="ui-icon-star" disabled="false" iconPos="right">
+                    <f:param name="foroP" value="50" />
+                </p:button>
+                <p:spacer/><p:spacer/>
+                <p:button outcome="Bienvenida" value=" Volver al Menú principal" icon="ui-icon-star" disabled="false" iconPos="right"></p:button>
+                <br/> 
+            </p:panel>
         </h:form>
     </h:body>
 </html>

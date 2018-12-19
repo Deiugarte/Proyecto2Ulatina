@@ -17,41 +17,39 @@ import org.apache.commons.mail.SimpleEmail;
 public class LoginController implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     //--------- Restablecer Contrasena" -----------
     private String correo; //SOLO PARA RESTABLECER CONTRASENA, 
-                          //USAR USER PARA TODO LO DEMAS...
-    
+    //USAR USER PARA TODO LO DEMAS...
+
     private String auxPass; // SOLO PARA RESTABLECER CONTRASENA,
-                           // USAR PASS PARA TODO LO DEMAS...
-    
+    // USAR PASS PARA TODO LO DEMAS...
+
     private String veriCode = null, code;
     //---------- FIN Restablecer contrasena ---------
-    
+
     private boolean logeado = false;
-    
+
     private int intentos = 0; // para bloquear cuenta...
 
     private int id;
+    //Variables para hacer login
     private String user, pass;
-    private String nombre, ape, ape2, naci, sexo, tel;
-    private boolean estado = false;   
-    
+
     Usuario usuario = new Usuario();
-    
+
     public LoginController() {
-        
+
     }
-    
+
     public String login() {
         UsuarioDao users = new UsuarioDao();
-
         if (users.isBlocked(this.user)) {
             return "CuentaBloqueada";
         } else if (loginUserWithCredentials(users)) {
             return "Bienvenida";
         }
-        return "";
+        return null;
     }
 
     private boolean loginUserWithCredentials(UsuarioDao users) {
@@ -64,12 +62,12 @@ public class LoginController implements Serializable {
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@", this.user);
             return true;
         } else {
+            System.out.println("Credenciales no Validos " + intentos);
             logeado = false;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Watch out for PrimeFaces."));
             intentos++;
-            if (intentos > 2) {
-                users.setEstado(this.estado, this.user);
-            }
+        }
+        if (intentos > 2) {
+            users.setEstado(false, this.user);
         }
         return false;
     }
@@ -100,14 +98,14 @@ public class LoginController implements Serializable {
         email.setSSLOnConnect(true);
         email.setFrom("proyecto2ulatina@gmail.com");
         email.setSubject("Restablecer Contrasena");
-        email.setMsg("Su codigo de verificacion es: " + veriCode + " y expirará en 2 horas (not really...).\n");
+        email.setMsg("Su codigo de verificacion es: " + veriCode + " y expirará en 2 horas\n");
         email.addTo(this.correo);
         email.send();
         return "NuevaContrasena";
     }
 
     public String nuevaContra() {
-        if (code.equals(veriCode)) {          
+        if (code.equals(veriCode)) {
             if (this.pass.equals(this.auxPass)) {
                 UsuarioDao usuerNewPass = new UsuarioDao();
                 usuerNewPass.nuevaContra(this.pass, this.user);
@@ -116,9 +114,7 @@ public class LoginController implements Serializable {
             } else {
                 return "ErrorContra";
             }
-        }
-        
-        else {
+        } else {
             return "ErrorContra";
         }
     }
@@ -130,8 +126,6 @@ public class LoginController implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-    
-    
 
     public String getUser() {
         return user;
@@ -188,8 +182,8 @@ public class LoginController implements Serializable {
     public void setCode(String code) {
         this.code = code;
     }
-    
-        public Usuario getUsuario() {
+
+    public Usuario getUsuario() {
         return usuario;
     }
 
