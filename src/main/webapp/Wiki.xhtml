@@ -7,33 +7,30 @@
     <h:head>
         <title>Wiki</title>
     </h:head>
-    <h:body>
+    <h:body style="background: #333333">
         <h:form id="crearWikiForm">
+            <br/><br/><br/>
             <p:panel id="crearWikPnl" header="Wiki"
-                     style="width: 1000px;margin: 0 auto;">
+                     style="width: 1000px;margin: 0 auto; text-align: center;font-weight: bolder; font-size: 90%;">
                 <h:panelGrid id="creWikPanel" columns="2" cellpadding="5">
                     <h:outputText value="Titulo"/>
                     <p:inputText id="Titulo" value="#{wikiController.titulo}"></p:inputText>
-                    <p:spacer/>
-                    <p:spacer/>
+                    <p:spacer/><p:spacer/>
                     <h:outputText value="Tema"/>
                     <p:inputText id="Tema" value="#{wikiController.tema}"></p:inputText>
-                    <p:spacer/>
-                    <p:spacer/>
-                    <br/>
-                    <h:outputText value="Contenido de la Wiki" style="margin-left: -90px "/>
-                    <p:spacer/>
-                    <p:spacer/>
-                    <br/>
+                    <p:spacer/><p:spacer/>          
+                    <h:outputText value="Contenido de la Wiki"/>
                     <p:inputTextarea rows="5" cols="30" autoResize="false" value="#{wikiController.contenido}" />
-                    <br/>
-                    <p:spacer/>
+                    <p:spacer/><p:spacer/>
                     <h:outputText value="Autor"/>
-                    <p:inputText id="Autor" value="#{loginController.usuario.id}" size="1"></p:inputText>
+                    <h:outputText value="#{loginController.usuario.id}" style="text-align: center;"/>
                     <p:spacer/>
                     <p:spacer/>
-                    <h:panelGrid id="crearWiki" columns="1" cellpadding="5" style="margin: 0 auto;">
-                        <p:commandButton id="wikiButton" action="#{wikiController.crearWiki()}" value="Subir" ></p:commandButton>
+                    <h:panelGrid id="crearWiki" columns="2" cellpadding="5" style="margin: 0 auto;">
+                        <p:commandButton id="wikiButton" action="#{wikiController.crearWiki(loginController.usuario.id)}" value="Subir" ></p:commandButton>
+                        <p:button style="width:110px;height:30px; margin: 0 auto; align-content: center; font-weight: bolder; font-size: 100%;" 
+                                  outcome="Wiki" value="  Volver " icon="ui-icon-star" iconPos="right">
+                        </p:button>
                     </h:panelGrid>
                 </h:panelGrid>
             </p:panel>

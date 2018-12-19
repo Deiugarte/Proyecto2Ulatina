@@ -20,6 +20,7 @@ public class WikiDao implements IDao<Wiki> {
 
     private final Conector conectorJDBC = Conector.getConector();
     private static final Logger LOG = LogManager.getLogger(UsuarioDao.class.getName());
+    private int idWiki;
 
     @Override
     public List<Wiki> buscar() {
@@ -52,8 +53,7 @@ public class WikiDao implements IDao<Wiki> {
         return wikis;
     }
 
-    public void insert(Wiki data, int idTema) {
-        int insertId = 0;
+    public void insert(Wiki data,int idAutor, int idTema) {
         Connection conn = conectorJDBC.conectar();
         PreparedStatement ps = null;
         PreparedStatement ps_2 = null;
@@ -63,15 +63,15 @@ public class WikiDao implements IDao<Wiki> {
             ps.setInt(1, data.getIdWiki());
             ps.setString(2, data.getTitulo());
             ps.setString(3, data.getContenido());
-            ps.setInt(4, data.getIdAutor());
+            ps.setInt(4, idAutor);
             ps.executeUpdate();
             rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                insertId = rs.getInt(1);
-                System.out.println(insertId);
+                idWiki = rs.getInt(1);
+                System.out.println("id del wiki "+idWiki);
             }
             ps_2 = conn.prepareStatement("insert into Temas_Wiki (id_wiki,id_temas) values (?,?);");
-            ps_2.setInt(1, insertId);
+            ps_2.setInt(1, idWiki);
             ps_2.setInt(2, idTema);
             ps_2.executeUpdate();
             ps_2.close();
