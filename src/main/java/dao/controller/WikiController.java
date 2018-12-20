@@ -34,15 +34,14 @@ public class WikiController implements Serializable {
         buscar();
     }
 
-    public String crearWiki() {
+    public String crearWiki(int idAutor) {
         WikiDao wikDao = new WikiDao();
         TemaDao temDao = new TemaDao();
         Wiki wik = new Wiki(this.idWiki, this.titulo, this.contenido, this.idAutor, this.idTema, this.tema);
         Tema tem = new Tema(this.idTema, this.tema);
         try {
-            temDao.insert(tem);
-            wikDao.insert(wik, temDao.insert(tem));
-            return "Login";
+            wikDao.insert(wik,idAutor,temDao.insert(tem));
+            return "Bienvenida";
         } catch (Exception e) {
             e.printStackTrace();
         }

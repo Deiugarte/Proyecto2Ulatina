@@ -25,7 +25,7 @@ public class TemaDao implements IDao<Tema> {
 
     private final Conector conectorJDBC = Conector.getConector();
     private static final Logger LOG = LogManager.getLogger(UsuarioDao.class.getName());
-    private int insertId = 0;
+    private int insertId;
 
     @Override
     public List<Tema> buscar() {
@@ -60,7 +60,7 @@ public class TemaDao implements IDao<Tema> {
             rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 insertId = rs.getInt(1);
-                System.out.println(insertId);
+                System.out.println("id del tema "+insertId);
             }
         } catch (SQLException e) {
             LOG.error("No se pudo insertar el tema... ", e);
