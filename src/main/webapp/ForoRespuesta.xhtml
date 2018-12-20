@@ -2,10 +2,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Foros</title>
+        <title>Respuestas</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+        <link rel="icon" href="./resources/favicon-16x16.ico"></link>
     </h:head>
     <h:body style="background: #333333">
         <br/><br/>
@@ -13,25 +14,29 @@
             <br/><br/><br/><br/>
             <p:panel id="crearForPnel" header="Foro"
                      style="width: 1000px;font-weight: bolder; font-size: 93%; margin: 0 auto; text-align: center;">
-                <h:panelGrid id="creForPanel" columns="1" cellpadding="5" style="font-weight: bolder; font-size: 100%;">
-                    <h:outputText value="Titulo de Pregunta" style="margin-left: 0px "/>
+                <h:panelGrid id="creForPanel" columns="2" cellpadding="5" style="font-weight: bolder; font-size: 100%;">
+                    <h:outputText value="Titulo de Pregunta:" style="margin-left: 0px "/>
                     <h:outputText id="TituloR" value="#{foroController.pTitulo}" ></h:outputText>
-                    <h:outputText value="Descripcion" style="margin-left: 0px "/>
+                    
+                    <h:outputText value="Descripcion:" style="margin-left: 0px "/>
                     <h:outputText id="PreguntaR" value="#{foroController.pPregunta}" ></h:outputText>
-                    <h:outputText value="Responder"/>
+                    <h:outputText value="Responder ->"/>
                     <p:inputTextarea rows="5" cols="30" autoResize="false" value="#{foroController.respuesta}" />
-                    <p:spacer/><p:spacer/>
-                    <h:outputText value="ID Autor de la respuesta"/>
+
+                    <h:outputText value="ID Autor de la respuesta:"/>
                     <h:outputText id="AutorR" value="#{loginController.usuario.id}" ></h:outputText>
-                    <p:spacer/><p:spacer/>
-                    <h:outputText value="ID de la Pregunta"/>
+
+                    <h:outputText value="ID de la Pregunta:"/>
                     <h:outputText id="PreguntaId" value="#{foroController.pId}" ></h:outputText>
-                    <p:spacer/><p:spacer/>
+
                     <h:outputText value="Fecha" style="visibility: hidden"/>
                     <h:outputText id="FeR" value="#{foroController.fecha}" ></h:outputText>
-                    <p:commandButton id="ForoButton" action="#{foroRespuestaController.Respuesta(loginController.usuario.id, foroController.pId ,foroController.respuesta, foroController.fecha)}" value="Responder" ></p:commandButton>
                     <p:button outcome="Foro" value=" Volver " icon="ui-icon-star" disabled="false" iconPos="right"></p:button>
-                    <p:spacer/><p:spacer/>
+                    <p:commandButton id="ForoButton" action="#{foroRespuestaController.Respuesta(loginController.usuario.id, foroController.pId ,foroController.respuesta, foroController.fecha)}" value="Responder" ></p:commandButton>
+                </h:panelGrid>
+
+                <h:panelGrid id="LasRes" columns="2" cellpadding="5" style="font-weight: bolder; font-size: 100%;">
+                     <p:commandButton id="RespButton" action="#{foroRespuestaController.buscarRespuestas(foroController.pId)}" value="Buscar Respuestas" update="Respuesticas" ></p:commandButton>
                     <p:dataTable id="Respuesticas" value="#{foroRespuestaController.respues}" var="respux">
                         <p:column headerText="Respuesta">
                             <h:outputText value="#{respux.desrespuesta}"/>
@@ -42,10 +47,9 @@
                         <p:column headerText="Fecha P.">
                             <h:outputText value="#{respux.fecha}"/>
                         </p:column>
+                        <p:commandButton id="RespButton" action="#{foroRespuestaController.buscarRespuestas(foroController.pId)}" value="Buscar Respuestas" update="Respuesticas" ></p:commandButton>
                     </p:dataTable>
-                    <p:spacer/><p:spacer/>
                 </h:panelGrid>
-                <p:commandButton id="RespButton" action="#{foroRespuestaController.buscarRespuestas(foroController.pId)}" value="Buscar Respuestas" update="Respuesticas" ></p:commandButton>
             </p:panel>
         </h:form>
     </h:body>
