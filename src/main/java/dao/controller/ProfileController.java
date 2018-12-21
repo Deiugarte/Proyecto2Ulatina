@@ -12,34 +12,31 @@ import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
-
 @ManagedBean(name = "profileController")
 @SessionScoped
 public class ProfileController implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     //--------- Restablecer Contrasena" -----------
     private String correo; //SOLO PARA RESTABLECER CONTRASENA, 
-                          //USAR USER PARA TODO LO DEMAS...
-    
+    //USAR USER PARA TODO LO DEMAS...
+
     private String auxPass; // SOLO PARA RESTABLECER CONTRASENA,
-                           // USAR PASS PARA TODO LO DEMAS...
-    
+    // USAR PASS PARA TODO LO DEMAS...
+
     private String veriCode = null, code;
     //---------- FIN Restablecer contrasena ---------
-    
+
     private boolean logeado = false;
-    
+
     private int intentos = 0; // para bloquear cuenta...
 
     private String user, pass;
-    private boolean estado = false;   
-    
+    private boolean estado = false;
+
     Usuario usuario = new Usuario();
-    
- 
-    
+
     public String login() {
         UsuarioDao users = new UsuarioDao();
 
@@ -74,7 +71,8 @@ public class ProfileController implements Serializable {
             FacesContext.getCurrentInstance().getExternalContext()
                     .invalidateSession();
             logeado = false;
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -107,8 +105,7 @@ public class ProfileController implements Serializable {
             usuerNewPass.nuevaContra(this.pass, this.user);
             usuerNewPass.desbloqueo(this.correo);
             return "Login";
-        }
-        else{
+        } else {
             return "ErrorContra";
         }
     }

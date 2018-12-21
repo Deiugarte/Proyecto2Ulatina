@@ -20,11 +20,11 @@ public class PublicacionBlogOtrosUsuariosController implements Serializable {
     private Date creation;
     private List<PublicacionBlog> blogs = new ArrayList<>();
     private PublicacionBlog selectedPub;
-    
+
     public PublicacionBlogOtrosUsuariosController() {
-    
+
     }
-    
+
     public PublicacionBlogOtrosUsuariosController(int author, String title, String content, Date creation) {
         this.author = author;
         this.title = title;
@@ -39,8 +39,7 @@ public class PublicacionBlogOtrosUsuariosController implements Serializable {
         return "Blog";
     }
 
-    
-        public List<PublicacionBlog> buscarPublicacionesPorAutor(String author) {
+    public List<PublicacionBlog> buscarPublicacionesPorAutor(String author) {
         PublicacionBlogDao blogDao = new PublicacionBlogDao();
         blogs = blogDao.buscarPublicacionesPorAutor(author);
         for (PublicacionBlog pub : blogs) {

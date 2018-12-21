@@ -1,4 +1,3 @@
-
 package dao.service;
 
 import java.util.List;
@@ -9,13 +8,13 @@ import java.util.List;
  * @param <T>
  */
 public interface IDao<T> {
-    
+
     public List<T> buscar();
-    
+
     public int insert(T data);
 
     public void delete(T data);
 
     public void update(T data);
-    
+
 }

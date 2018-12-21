@@ -9,8 +9,8 @@ package dao.model;
  *
  * @author blaken
  */
-
 public class SearchResulSchema {
+
     private String tittle;
     private String author;
     private byte[] content;
@@ -64,12 +64,10 @@ public class SearchResulSchema {
     public void setType(String type) {
         this.type = type;
     }
-    
 
     @Override
     public String toString() {
-        return "SearchResulSchema{" + "tittle=" + tittle + ", author=" + author  +  ", type=" + type + ", _id=" + _id + '}';
+        return "SearchResulSchema{" + "tittle=" + tittle + ", author=" + author + ", type=" + type + ", _id=" + _id + '}';
     }
-    
-    
+
 }

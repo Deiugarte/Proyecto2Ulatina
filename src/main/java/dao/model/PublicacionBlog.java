@@ -22,8 +22,8 @@ public class PublicacionBlog {
         this.content = content;
         this.creation = creation;
     }
-    
-    public PublicacionBlog(String title, String content, String nombre, Timestamp creation){
+
+    public PublicacionBlog(String title, String content, String nombre, Timestamp creation) {
         this.title = title;
         this.content = content;
         this.nombre = nombre;
