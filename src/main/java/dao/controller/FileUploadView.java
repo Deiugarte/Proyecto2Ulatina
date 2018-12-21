@@ -42,7 +42,7 @@ public class FileUploadView {
             System.out.println(file.getFileName());
             byte[] fileData = file.getContents();
             String encodedString = Base64.encodeToString(fileData, false);
-            System.out.println(doc.subida(encodedString, file.getFileName().replaceAll("\\s","")));
+            System.out.println(doc.subida(encodedString, file.getFileName().replaceAll("\\s", "")));
             FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }

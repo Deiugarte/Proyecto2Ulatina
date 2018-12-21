@@ -5,7 +5,6 @@
  */
 package dao.model;
 
-
 import dao.model.SearchResulSchema;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -51,8 +50,10 @@ public class Documentos {
             String elkResponse = getResponse(conn);
             return decodeELKResponse(elkResponse);
 
-        } catch (MalformedURLException e) {
-        } catch (IOException e) {
+        }
+        catch (MalformedURLException e) {
+        }
+        catch (IOException e) {
         }
         return null;
     }
@@ -64,8 +65,10 @@ public class Documentos {
             String elkResponse = getResponse(conn);
             return decodeFILEELKResponse(elkResponse);
 
-        } catch (MalformedURLException e) {
-        } catch (IOException e) {
+        }
+        catch (MalformedURLException e) {
+        }
+        catch (IOException e) {
         }
         return null;
     }
@@ -78,8 +81,10 @@ public class Documentos {
             String elkResponse = getResponse(conn);
             return elkResponse;
 
-        } catch (MalformedURLException e) {
-        } catch (IOException e) {
+        }
+        catch (MalformedURLException e) {
+        }
+        catch (IOException e) {
         }
         return null;
     }
@@ -91,8 +96,10 @@ public class Documentos {
             String elkResponse = getResponse(conn);
             return elkResponse;
 
-        } catch (MalformedURLException e) {
-        } catch (IOException e) {
+        }
+        catch (MalformedURLException e) {
+        }
+        catch (IOException e) {
         }
         return null;
     }
@@ -116,12 +123,12 @@ public class Documentos {
     private static SearchResulSchema decodeFILEELKResponse(String elkResponse) throws ParseException {
         JSONParser parser = new JSONParser();
         JSONObject json = (JSONObject) parser.parse(elkResponse);
-            JSONObject data = (JSONObject) ((JSONObject) json).get("_source");
-            byte[] content = String.valueOf(data.get("data")).getBytes();
-            byte[] content2 = Base64.getDecoder().decode(content);
-            data = (JSONObject) data.get("attachment");
-            return new SearchResulSchema(String.valueOf(data.get("title")), String.valueOf(data.get("author")), content2, String.valueOf(((JSONObject) json).get("_id")), String.valueOf(data.get("content_type")));
-        
+        JSONObject data = (JSONObject) ((JSONObject) json).get("_source");
+        byte[] content = String.valueOf(data.get("data")).getBytes();
+        byte[] content2 = Base64.getDecoder().decode(content);
+        data = (JSONObject) data.get("attachment");
+        return new SearchResulSchema(String.valueOf(data.get("title")), String.valueOf(data.get("author")), content2, String.valueOf(((JSONObject) json).get("_id")), String.valueOf(data.get("content_type")));
+
     }
 
     private String getResponse(HttpURLConnection conn) throws IOException, RuntimeException {

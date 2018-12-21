@@ -141,7 +141,7 @@
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>lastest</version>
                 <configuration>
-                    <configLocation>sun_checks.xml</configLocation>
+                    <configLocation>google_checks.xml</configLocation>
                 </configuration>
                 
             </plugin>

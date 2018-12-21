@@ -21,16 +21,15 @@ public class PublicacionBlogController implements Serializable {
     private List<PublicacionBlog> blogs = new ArrayList<>();
     private PublicacionBlog selectedPub;
 
-    public PublicacionBlogController(){
-        
+    public PublicacionBlogController() {
+
     }
 
-    
     @PostConstruct
     public void cargar() {
-        this.buscarPublicacionesPorAutor(this.nombre);
+        this.buscarPublicaciones();
     }
-    
+
     public PublicacionBlogController(int author, String title, String content, Date creation) {
         this.author = author;
         this.title = title;
@@ -45,10 +44,17 @@ public class PublicacionBlogController implements Serializable {
         return "Blog";
     }
 
-    
-        public List<PublicacionBlog> buscarPublicacionesPorAutor(String author) {
+    public List<PublicacionBlog> buscarPublicacionesPorAutor(String author) {
         PublicacionBlogDao blogDao = new PublicacionBlogDao();
         blogs = blogDao.buscarPublicacionesPorAutor(author);
+        for (PublicacionBlog pub : blogs) {
+            System.out.println(pub);
+        }
+        return blogs;
+    }
+    public List<PublicacionBlog> buscarPublicaciones() {
+        PublicacionBlogDao blogDao = new PublicacionBlogDao();
+        blogs = blogDao.buscarPublicaciones();
         for (PublicacionBlog pub : blogs) {
             System.out.println(pub);
         }

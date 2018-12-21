@@ -25,30 +25,31 @@ public class PublicacionBlogDao {
             sql = "SELECT "
                     + "pub.title, pub.content,pub.creation_date, per.nombre "
                     + "FROM "
-                    + "persona per "
+                    + "Persona per "
                     + "JOIN "
                     + "publicacion_blog pub "
                     + "ON "
                     + "per.id = pub.author "
                     + "ORDER BY "
                     + "creation_date DESC;";
-            
+
             PreparedStatement stmt = connectionDB.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 publicaciones.add(new PublicacionBlog(rs.getString("title"),
-                        rs.getString("content"),rs.getString("nombre"), rs.getTimestamp("creation_date")));
+                        rs.getString("content"), rs.getString("nombre"), rs.getTimestamp("creation_date")));
             }
             rs.close();
             stmt.close();
             conectorJDBC.cerrarConexion(connectionDB, stmt, null);
 
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
         return publicaciones;
     }
-    
+
     public List<PublicacionBlog> buscarPublicacionesPorAutor(String author) {
         Connection conn = conectorJDBC.conectar();
         List<PublicacionBlog> publicaciones = new ArrayList<>();
@@ -64,9 +65,11 @@ public class PublicacionBlogDao {
                         rs.getString("content"), rs.getString("nombre"), rs.getTimestamp("creation_date")));
             }
 
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
-        } finally {
+        }
+        finally {
             conectorJDBC.cerrarConexion(conn, ps, rs);
         }
         return publicaciones;
@@ -82,9 +85,11 @@ public class PublicacionBlogDao {
             ps.setInt(3, publicacion.getAuthor());
             ps.setTimestamp(4, publicacion.getCreation());
             ps.executeUpdate();
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex) {
             LOG.error("No se puedo realizar la insercion del usuario... ", ex);
-        } finally {
+        }
+        finally {
             conectorJDBC.cerrarConexion(connectionDB, ps, null);
         }
     }
