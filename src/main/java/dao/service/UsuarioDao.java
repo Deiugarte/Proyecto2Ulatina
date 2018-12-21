@@ -29,7 +29,7 @@ public class UsuarioDao implements IDao<Usuario> {
                 usuarios.add(new Usuario(rs.getString("contrasena"), rs.getString("correo"),
                         rs.getString("nombre"), rs.getString("apellido"), rs.getString("segundoApellido"),
                         rs.getString("sexo"), rs.getString("telefono"),
-                        rs.getDate("fechaNacimiento"), rs.getDouble("calificacion"), rs.getBoolean("estado"),rs.getInt("id")));
+                        rs.getDate("fechaNacimiento"), rs.getDouble("calificacion"), rs.getBoolean("estado"), rs.getInt("id")));
             }
             rs.close();
             stmt.close();
@@ -60,7 +60,6 @@ public class UsuarioDao implements IDao<Usuario> {
             ps.setString(8, usuario.getTelefono());
             ps.setDouble(9, usuario.getCalificacion());
             ps.setBoolean(10, true);
-            ps.setInt(11, usuario.getId());
             ps.executeUpdate();
 
         } catch (SQLException ex) {
@@ -85,7 +84,7 @@ public class UsuarioDao implements IDao<Usuario> {
                 userLogged = new Usuario(rs.getString("contrasena"), rs.getString("correo"),
                         rs.getString("nombre"), rs.getString("apellido"), rs.getString("segundoApellido"),
                         rs.getString("sexo"), rs.getString("telefono"),
-                        rs.getDate("fechaNacimiento"), rs.getDouble("calificacion"), rs.getBoolean("estado"),rs.getInt("id"));
+                        rs.getDate("fechaNacimiento"), rs.getDouble("calificacion"), rs.getBoolean("estado"), rs.getInt("id"));
             }
             return userLogged;
         } catch (SQLException ex) {
@@ -96,8 +95,8 @@ public class UsuarioDao implements IDao<Usuario> {
         System.out.println(userLogged.getNombre());
         return userLogged;
     }
-    
-    public boolean isBlocked(String correo){
+
+    public boolean isBlocked(String correo) {
         Connection conn = conectorJDBC.conectar();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -106,8 +105,8 @@ public class UsuarioDao implements IDao<Usuario> {
             ps = conn.prepareStatement("SELECT estado FROM Persona WHERE correo=?");
             ps.setString(1, correo);
             rs = ps.executeQuery();
-            while(rs.next()){
-            block = !rs.getBoolean("estado");
+            while (rs.next()) {
+                block = !rs.getBoolean("estado");
             }
         } catch (SQLException ex) {
             LOG.error("Error al intentar leer datos.", ex);
@@ -116,7 +115,7 @@ public class UsuarioDao implements IDao<Usuario> {
         }
         return block;
     }
-    
+
     public void setEstado(boolean estado, String user) {
         Connection conn = conectorJDBC.conectar();
         PreparedStatement ps = null;
